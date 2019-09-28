@@ -9,7 +9,7 @@ namespace QuotationCryptocurrency.Requests
     public class CoinMarkerCapHttpRequest : HttpRequestBase
     {
         public const string StartElem = "1";
-        public const string LimitElem = "5000";
+        public const string LimitElem = "50";
         public const string Convert = "USD";
 
         private string GetParameters()

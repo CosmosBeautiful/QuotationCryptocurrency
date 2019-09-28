@@ -1,0 +1,66 @@
+﻿@model IEnumerable<QuotationCryptocurrency.Models.IModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>QuotationCryptocurrency</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Symbol
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            PercentChange1h
+        </th>
+        <th>
+            PercentChange24h
+        </th>
+        <th>
+            MarketCap
+        </th>
+        <th>
+            LastUpdated
+        </th>
+    </tr>
+
+    @foreach (QuotationCryptocurrency.Quotations.CryptocurrencyQuotationModel item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                <img src="https://s2.coinmarketcap.com/static/img/coins/32x32/@{@item.Id}.png" class="logo-sprite" alt="Bitcoin" height="16" width="16">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Symbol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PercentChange1h)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PercentChange24h)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketCap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdated)
+            </td>
+        </tr>
+    }
+</table>

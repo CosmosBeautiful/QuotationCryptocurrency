@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotationCryptocurrency", "QuotationCryptocurrency\QuotationCryptocurrency.csproj", "{E85665EE-D2AF-4849-95A9-0F7C4ABEE92B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotationCryptocurrency.Tests", "QuotationCryptocurrency.Tests\QuotationCryptocurrency.Tests.csproj", "{435A1679-AEBD-4980-89A3-FC220AD456D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotationCryptocurrency.Tests", "QuotationCryptocurrency.Tests\QuotationCryptocurrency.Tests.csproj", "{435A1679-AEBD-4980-89A3-FC220AD456D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
