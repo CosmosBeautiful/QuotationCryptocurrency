@@ -1,1 +1,1 @@
-Solves equations like ( 5 + 78 / 6 ) - 24 / 12 =
+Receiving Quotation Cryptocurrency from Api

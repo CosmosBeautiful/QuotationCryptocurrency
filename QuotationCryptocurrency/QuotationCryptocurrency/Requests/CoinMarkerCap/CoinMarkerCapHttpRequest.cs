@@ -1,23 +1,23 @@
 ﻿using Newtonsoft.Json;
 using QuotationCryptocurrency.Models;
-using QuotationCryptocurrency.Request.CoinMarkerCap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using QuotationCryptocurrency.Requests.CoinMarkerCap;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web;
 
-namespace QuotationCryptocurrency.Request
+namespace QuotationCryptocurrency.Requests
 {
     public class CoinMarkerCapHttpRequest : HttpRequestBase
     {
+        public const string StartElem = "1";
+        public const string LimitElem = "5000";
+        public const string Convert = "USD";
+
         private string GetParameters()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
-            queryString["start"] = "1";
-            queryString["limit"] = "5000";
-            queryString["convert"] = "USD";
+            queryString["start"] = StartElem;
+            queryString["limit"] = LimitElem;
+            queryString["convert"] = Convert;
 
             return queryString.ToString();
         }

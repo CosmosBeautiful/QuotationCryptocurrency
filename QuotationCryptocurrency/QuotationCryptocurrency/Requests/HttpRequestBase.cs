@@ -1,15 +1,7 @@
-﻿using Newtonsoft.Json;
-using QuotationCryptocurrency.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using QuotationCryptocurrency.Models;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 
-namespace QuotationCryptocurrency.Request
+namespace QuotationCryptocurrency.Requests
 {
     public abstract class HttpRequestBase : IRequest
     {

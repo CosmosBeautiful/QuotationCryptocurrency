@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using QuotationCryptocurrency.Request;
-using QuotationCryptocurrency.Request.CoinMarkerCap;
+using QuotationCryptocurrency.Requests;
+using QuotationCryptocurrency.Requests.CoinMarkerCap;
 
 namespace QuotationCryptocurrency.Tests.Request
 {

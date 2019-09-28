@@ -1,7 +1,8 @@
 ﻿using Newtonsoft.Json;
+using QuotationCryptocurrency.Models;
 using System;
 
-namespace QuotationCryptocurrency.Request.CoinMarkerCap
+namespace QuotationCryptocurrency.Requests.CoinMarkerCap
 {
     public class CoinMarkerCapDataParams
     {
@@ -14,8 +15,8 @@ namespace QuotationCryptocurrency.Request.CoinMarkerCap
         [JsonProperty("symbol")]
         public string Symbol { get; set; }
 
-        [JsonProperty("slub")]
-        public int Slub { get; set; }
+        [JsonProperty("slug")]
+        public string Slug { get; set; }
 
         [JsonProperty("num_marker_pairs")]
         public int NumMarkerPairs { get; set; }

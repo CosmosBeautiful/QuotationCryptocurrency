@@ -13,6 +13,11 @@ using Microsoft.EntityFrameworkCore;
 using QuotationCryptocurrency.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
+using QuotationCryptocurrency.Mappings;
+using QuotationCryptocurrency.Quotations;
+using QuotationCryptocurrency.Requests;
+using QuotationCryptocurrency.Parsers;
 
 namespace QuotationCryptocurrency
 {
@@ -41,6 +46,18 @@ namespace QuotationCryptocurrency
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+            services.AddTransient<IRequest, CoinMarkerCapHttpRequest>();
+            services.AddTransient<IQuotation, CryptocurrencyQuotation>();
+            services.AddTransient<IParser, CoinMarkerCapParser>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
