@@ -18,6 +18,7 @@ using QuotationCryptocurrency.Mappings;
 using QuotationCryptocurrency.Quotations;
 using QuotationCryptocurrency.Requests;
 using QuotationCryptocurrency.Parsers;
+using QuotationCryptocurrency.Configurations;
 
 namespace QuotationCryptocurrency
 {
@@ -46,6 +47,10 @@ namespace QuotationCryptocurrency
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            services.AddOptions();
+            services.Configure<CoinMarkerCapConfig>(Configuration.GetSection("CoinMarkerCap"));
 
             var mappingConfig = new MapperConfiguration(mc =>
             {

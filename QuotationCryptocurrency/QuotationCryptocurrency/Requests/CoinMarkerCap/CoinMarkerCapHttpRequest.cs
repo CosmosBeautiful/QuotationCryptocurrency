@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using QuotationCryptocurrency.Configurations;
 using QuotationCryptocurrency.Models;
 using QuotationCryptocurrency.Requests.CoinMarkerCap;
 using System.Net.Http;
@@ -8,16 +10,19 @@ namespace QuotationCryptocurrency.Requests
 {
     public class CoinMarkerCapHttpRequest : HttpRequestBase
     {
-        public const string StartElem = "1";
-        public const string LimitElem = "50";
-        public const string Convert = "USD";
+        private CoinMarkerCapConfig CoinMarkerCapConfig { get; set; }
+
+        public CoinMarkerCapHttpRequest(IOptions<CoinMarkerCapConfig> CoinMarkerCapOptions)
+        {
+            CoinMarkerCapConfig = CoinMarkerCapOptions.Value;
+        }
 
         private string GetParameters()
         {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
-            queryString["start"] = StartElem;
-            queryString["limit"] = LimitElem;
-            queryString["convert"] = Convert;
+            queryString["start"] = CoinMarkerCapConfig.StartElem.ToString();
+            queryString["limit"] = CoinMarkerCapConfig.LimitElem.ToString();
+            queryString["convert"] = CoinMarkerCapConfig.Currency;
 
             return queryString.ToString();
         }
@@ -25,7 +30,7 @@ namespace QuotationCryptocurrency.Requests
         protected override string GetСustomizedUrl()
         {
             var parameters = GetParameters();
-            var url = $"https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest" + "?" + parameters;
+            var url = $"{CoinMarkerCapConfig.ApiUrl}?{parameters}";
 
             return url;
         }
@@ -33,7 +38,7 @@ namespace QuotationCryptocurrency.Requests
         protected override HttpClient GetСustomizedHttpClient()
         {
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", "f34514dd-d398-4561-82c1-b9552c59d4ee");
+            client.DefaultRequestHeaders.Add("X-CMC_PRO_API_KEY", CoinMarkerCapConfig.ApiKey);
 
             return client;
         }
