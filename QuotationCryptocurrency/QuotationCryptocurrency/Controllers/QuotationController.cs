@@ -3,6 +3,7 @@ using QuotationCryptocurrency.Models;
 using QuotationCryptocurrency.Quotations;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace QuotationCryptocurrency.Controllers
 {
@@ -14,11 +15,12 @@ namespace QuotationCryptocurrency.Controllers
             _quotation = quotation;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            List<IModel> list = _quotation.GetQuotation();
+            List<IModel> quotations = _quotation.GetQuotation();
+            var viewModel = new IndexViewModel(quotations, page);
 
-            return View(list);
+            return View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

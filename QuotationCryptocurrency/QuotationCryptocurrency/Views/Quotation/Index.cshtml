@@ -1,4 +1,7 @@
-﻿@model IEnumerable<QuotationCryptocurrency.Models.IModel>
+﻿@using QuotationCryptocurrency.Models
+@using QuotationCryptocurrency.Quotations
+
+@model IndexViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -33,7 +36,7 @@
         </th>
     </tr>
 
-    @foreach (QuotationCryptocurrency.Quotations.CryptocurrencyQuotationModel item in Model)
+    @foreach (CryptocurrencyQuotationModel item in Model.Models)
     {
         <tr>
             <td>
@@ -64,3 +67,16 @@
         </tr>
     }
 </table>
+
+@if (Model.PageNavigation.HasPreviousPage)
+{
+    <a href="?page=@(Model.PageNavigation.PageNumber - 1)" class="btn btn-default">
+        Назад
+    </a>
+}
+@if (Model.PageNavigation.HasNextPage)
+{
+    <a href="?page=@(Model.PageNavigation.PageNumber + 1)" class="btn btn-default">
+        Вперед
+    </a>
+}
