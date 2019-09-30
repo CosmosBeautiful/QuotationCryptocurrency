@@ -9,17 +9,18 @@
     ViewBag.Title = "Index";
 }
     <div>
-        <h2>QuotationCryptocurrency</h2>
+        <h2>Quotation Cryptocurrency</h2>
+        <hr />
+
         <form method="get">
             <div class="form-inline">
-                <label class="control-label">Name: </label>
+                <label class="control-label">Name:&nbsp;</label>
                 @Html.TextBox("selectedName", Model.FilterModel.SelectedName, htmlAttributes: new { @class = "form-control" })
 
                 <input type="submit" value="Фильтр" class="btn btn-default" />
             </div>
         </form>
-
-        <hr />
+        <br />
 
         <table class="table table-striped">
             <tr>
@@ -118,7 +119,7 @@
                 <page-link page-navigation="Model.PageNavigation" page-action="Index"></page-link>
                 @if (Model.PageNavigation.HasNextPage)
                 {
-                    
+
                     <div class="page-item">
                         <a asp-action="Index"
                            asp-route-pageData="@(Model.PageNavigation.PageNumber + 1)" class="page-link">
