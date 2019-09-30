@@ -2,6 +2,8 @@
 @using QuotationCryptocurrency.Quotations
 @using QuotationCryptocurrency.FilterModels.Quotation
 
+@addTagHelper "*, QuotationCryptocurrency"
+
 @model QuotationViewModel
 @{
     ViewBag.Title = "Index";
@@ -101,19 +103,29 @@
             }
         </table>
 
-        @if (Model.PageNavigation.HasPreviousPage)
-        {
-            <a asp-action="Index"
-               asp-route-pageData="@(Model.PageNavigation.PageNumber - 1)" class="btn btn-default">
-                Back
-            </a>
+        <div class="container">
+            <div class="d-flex flex-row">
+                @if (Model.PageNavigation.HasPreviousPage)
+                {
+                    <div class="page-item">
+                        <a asp-action="Index"
+                           asp-route-pageData="@(Model.PageNavigation.PageNumber - 1)" class="page-link">
+                            Back
+                        </a>
+                    </div>
 
-        }
-        @if (Model.PageNavigation.HasNextPage)
-        {
-            <a asp-action="Index"
-               asp-route-pageData="@(Model.PageNavigation.PageNumber + 1)" class="btn btn-default">
-                Next
-            </a>
-        }
+                }
+                <page-link page-navigation="Model.PageNavigation" page-action="Index"></page-link>
+                @if (Model.PageNavigation.HasNextPage)
+                {
+                    
+                    <div class="page-item">
+                        <a asp-action="Index"
+                           asp-route-pageData="@(Model.PageNavigation.PageNumber + 1)" class="page-link">
+                            Next
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
