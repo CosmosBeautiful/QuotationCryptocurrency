@@ -1,111 +1,119 @@
 ﻿@using QuotationCryptocurrency.Models
 @using QuotationCryptocurrency.Quotations
-@using QuotationCryptocurrency.FilterModels.CryptocurrencyQuotation
+@using QuotationCryptocurrency.FilterModels.Quotation
 
-@model CryptocurrencyQuotationViewModel
+@model QuotationViewModel
 @{
     ViewBag.Title = "Index";
 }
-<div>
-    <h2>QuotationCryptocurrency</h2>
+    <div>
+        <h2>QuotationCryptocurrency</h2>
+        <form method="get">
+            <div class="form-inline">
+                <label class="control-label">Name: </label>
+                @Html.TextBox("selectedName", Model.FilterModel.SelectedName, htmlAttributes: new { @class = "form-control" })
 
-    <table class="table table-striped">
-        <tr>
-            <th>
-                <a asp-action="Index"
-                   asp-route-sortOrder="@(Model.SortModel.IdSort)">
-                    Id
-                </a>
-            </th>
-            <th>
-                <a asp-action="Index"
-                   asp-route-sortOrder="@(Model.SortModel.NameSort)">
-                    Name
-                </a>
-            </th>
-            <th>
-                <a asp-action="Index"
-                   asp-route-sortOrder="@(Model.SortModel.SymbolSort)">
-                    Symbol
-                </a>
-            </th>
-            <th>
-                <a asp-action="Index"
-                   asp-route-sortOrder="@(Model.SortModel.PriceSort)">
-                    Price
-                </a>
-            </th>
-            <th>
-                <a asp-action="Index"
-                   asp-route-sortOrder="@(Model.SortModel.PercentChange1hSort)">
-                    PercentChange1h
-                </a>
-            </th>
-            <th>
-                <a asp-action="Index"
-                   asp-route-sortOrder="@(Model.SortModel.PercentChange24hSort)">
-                    PercentChange24hSort
-                </a>
-            </th>
-            <th>
-                <a asp-action="Index"
-                   asp-route-sortOrder="@(Model.SortModel.MarketCapSort)">
-                    MarketCap
-                </a>
-            </th>
-            <th>
-                <a asp-action="Index"
-                   asp-route-sortOrder="@(Model.SortModel.LastUpdatedSort)">
-                    LastUpdated
-                </a>
-            </th>
-        </tr>
+                <input type="submit" value="Фильтр" class="btn btn-default" />
+            </div>
+        </form>
 
-        @foreach (CryptocurrencyQuotationModel item in Model.Models)
-        {
+        <hr />
+
+        <table class="table table-striped">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/32x32/@{@item.Id}.png" class="logo-sprite" alt="Bitcoin" height="16" width="16">
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Symbol)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PercentChange1h)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PercentChange24h)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MarketCap)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastUpdated)
-                </td>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortModel.NameSort)"
+                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                        Name
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortModel.SymbolSort)"
+                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                        Symbol
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortModel.PriceSort)"
+                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                        Price
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortModel.PercentChange1hSort)"
+                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                        PercentChange1h
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortModel.PercentChange24hSort)"
+                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                        PercentChange24hSort
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortModel.MarketCapSort)"
+                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                        MarketCap
+                    </a>
+                </th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="@(Model.SortModel.LastUpdatedSort)"
+                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                        LastUpdated
+                    </a>
+                </th>
             </tr>
+
+            @foreach (QuotationModel item in Model.Quotations)
+            {
+                <tr>
+                    <td>
+                        <img src="https://s2.coinmarketcap.com/static/img/coins/32x32/@{@item.Id}.png" class="logo-sprite" alt="Bitcoin" height="16" width="16">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Symbol)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PercentChange1h)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PercentChange24h)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MarketCap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdated)
+                    </td>
+                </tr>
+            }
+        </table>
+
+        @if (Model.PageNavigation.HasPreviousPage)
+        {
+            <a asp-action="Index"
+               asp-route-pageData="@(Model.PageNavigation.PageNumber - 1)" class="btn btn-default">
+                Back
+            </a>
+
         }
-    </table>
-
-    @if (Model.PageNavigation.HasPreviousPage)
-    {
-        <a asp-action="Index"
-           asp-route-pageData="@(Model.PageNavigation.PageNumber - 1)" class="btn btn-default">
-            Back
-        </a>
-
-    }
-    @if (Model.PageNavigation.HasNextPage)
-    {
-        <a asp-action="Index"
-           asp-route-pageData="@(Model.PageNavigation.PageNumber + 1)" class="btn btn-default">
-            Next
-        </a>
-    }
-</div>
+        @if (Model.PageNavigation.HasNextPage)
+        {
+            <a asp-action="Index"
+               asp-route-pageData="@(Model.PageNavigation.PageNumber + 1)" class="btn btn-default">
+                Next
+            </a>
+        }
+    </div>

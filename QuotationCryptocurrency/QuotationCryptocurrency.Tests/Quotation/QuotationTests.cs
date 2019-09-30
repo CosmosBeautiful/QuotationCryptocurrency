@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace QuotationCryptocurrency.Tests.Quotation
 {
     [TestClass]
-    public class CryptocurrencyQuotationTests
+    public class QuotationTests
     {
         [TestMethod]
         public void GetQuotation()
@@ -25,10 +25,10 @@ namespace QuotationCryptocurrency.Tests.Quotation
                .Setup(repo => repo.ParsersyQuotationFromRequest(It.IsAny<IModel>()))
                .Returns(new List<IModel>());
 
-            var cryptocurrencyQuotation = new CryptocurrencyQuotation(mockRequest.Object, mockParser.Object);
+            var quotation = new Quotations.Quotation(mockRequest.Object, mockParser.Object);
 
             //act
-            cryptocurrencyQuotation.GetQuotation();
+            quotation.GetQuotation();
 
             //assert
             mockRequest.VerifyAll();

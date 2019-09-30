@@ -5,22 +5,22 @@ using System.Collections.Generic;
 
 namespace QuotationCryptocurrency.Quotations
 {
-    public class CryptocurrencyQuotation : IQuotation
+    public class Quotation : IQuotation
     {
         private readonly IRequest _request;
         private readonly IParser _parser;
 
-        public CryptocurrencyQuotation(IRequest request, IParser parser)
+        public Quotation(IRequest request, IParser parser)
         {
             _request = request;
             _parser = parser;
         }
 
-        public List<IModel> GetQuotation()
+        public IEnumerable<IModel> GetQuotation()
         {
             IModel response = _request.Send();
 
-            List<IModel> list = _parser.ParsersyQuotationFromRequest(response);
+            IEnumerable<IModel> list = _parser.ParsersyQuotationFromRequest(response);
 
             return list;
         }

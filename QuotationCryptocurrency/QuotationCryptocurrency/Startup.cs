@@ -61,7 +61,7 @@ namespace QuotationCryptocurrency
             services.AddSingleton(mapper);
 
             services.AddTransient<IRequest, CoinMarkerCapHttpRequest>();
-            services.AddTransient<IQuotation, CryptocurrencyQuotation>();
+            services.AddTransient<IQuotation, Quotation>();
             services.AddTransient<IParser, CoinMarkerCapParser>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

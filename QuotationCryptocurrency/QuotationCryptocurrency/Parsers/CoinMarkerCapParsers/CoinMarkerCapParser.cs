@@ -23,7 +23,7 @@ namespace QuotationCryptocurrency.Parsers
 
             foreach (var item in parapms.Data)
             {
-                list.Add(_mapper.Map<CryptocurrencyQuotationModel>(item));
+                list.Add(_mapper.Map<QuotationModel>(item));
             }
 
             return list;

@@ -8,7 +8,7 @@ namespace QuotationCryptocurrency.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<CoinMarkerCapDataParams, CryptocurrencyQuotationModel>()
+            CreateMap<CoinMarkerCapDataParams, QuotationModel>()
                 .ForMember(x => x.Id, s => s.MapFrom(x => x.Id))
                 .ForMember(x => x.Name, s => s.MapFrom(x => x.Name))
                 .ForMember(x => x.Symbol, s => s.MapFrom(x => x.Symbol))

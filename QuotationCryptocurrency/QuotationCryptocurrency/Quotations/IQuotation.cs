@@ -5,6 +5,6 @@ namespace QuotationCryptocurrency.Quotations
 {
     public interface IQuotation
     {
-        List<IModel> GetQuotation();
+        IEnumerable<IModel> GetQuotation();
     }
 }

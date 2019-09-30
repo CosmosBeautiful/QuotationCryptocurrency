@@ -1,6 +1,6 @@
-﻿namespace QuotationCryptocurrency.FilterModels.CryptocurrencyQuotation
+﻿namespace QuotationCryptocurrency.FilterModels.Quotation
 {
-    public enum CryptocurrencyQuotationSortType
+    public enum QuotationSortType
     {
         None,
         IdAsc,

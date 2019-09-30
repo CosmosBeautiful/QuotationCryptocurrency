@@ -67,7 +67,7 @@ namespace QuotationCryptocurrency.Tests.Parsers
         {
             var list = new List<IModel>()
             {
-                new CryptocurrencyQuotationModel()
+                new QuotationModel()
                 {
                     Id = 1,
                     Name = "Bitcoin",
@@ -92,29 +92,13 @@ namespace QuotationCryptocurrency.Tests.Parsers
             var parser = new CoinMarkerCapParser(mapper);
 
             IModel responseCoinMarkerCapParams = CreateCoinMarkerCapParams();
-            List<IModel> expectedList = CreateCryptocurrencyQuotationModels();
+            List<IModel> equationModels = CreateCryptocurrencyQuotationModels();
 
             //act
-            List<IModel> actualList = parser.ParsersyQuotationFromRequest(responseCoinMarkerCapParams);
+            List<IModel> actualModels = parser.ParsersyQuotationFromRequest(responseCoinMarkerCapParams);
 
             //assert
-            //CollectionAssert.AreEqual(expectedList, actualList);
-            
-            for (int i = 0; i < expectedList.Count; i++)
-            {
-                var q1 = (CryptocurrencyQuotationModel)expectedList[i];
-                var q2 = (CryptocurrencyQuotationModel)actualList[i];
-
-
-                Assert.AreEqual(q1.Id, q2.Id);
-                Assert.AreEqual(q1.Name, q2.Name);
-                Assert.AreEqual(q1.Symbol, q2.Symbol);
-                Assert.AreEqual(q1.Price, q2.Price);
-                Assert.AreEqual(q1.PercentChange1h, q2.PercentChange1h);
-                Assert.AreEqual(q1.PercentChange24h, q2.PercentChange24h);
-                Assert.AreEqual(q1.MarketCap, q2.MarketCap);
-                Assert.AreEqual(q1.LastUpdated, q2.LastUpdated);
-            }
+            CollectionAssert.AreEqual(equationModels, actualModels);
         }
     }
 }

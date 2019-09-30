@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using QuotationCryptocurrency.FilterModels.CryptocurrencyQuotation;
+using QuotationCryptocurrency.FilterModels;
+using QuotationCryptocurrency.FilterModels.Quotation;
 using QuotationCryptocurrency.Models;
 using QuotationCryptocurrency.Quotations;
 using System.Collections.Generic;
@@ -16,11 +17,11 @@ namespace QuotationCryptocurrency.Controllers
             _quotation = quotation;
         }
 
-        public IActionResult Index(int pageData = 1, CryptocurrencyQuotationSortType sortOrder = CryptocurrencyQuotationSortType.None)
+        public IActionResult Index(int pageData = 1, QuotationSortType sortOrder = QuotationSortType.None, string selectedName = "")
         {
-            List<IModel> quotations = _quotation.GetQuotation();
-            var viewModel = new CryptocurrencyQuotationViewModel(quotations, pageData, sortOrder);
+            IEnumerable<QuotationModel> quotations = _quotation.GetQuotation().Cast<QuotationModel>();
 
+            var viewModel = new QuotationViewModel(quotations, pageData, sortOrder, selectedName);
             return View(viewModel);
         }
 
