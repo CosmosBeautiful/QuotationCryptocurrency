@@ -19,6 +19,7 @@ using QuotationCryptocurrency.Quotations;
 using QuotationCryptocurrency.Requests;
 using QuotationCryptocurrency.Parsers;
 using QuotationCryptocurrency.Configurations;
+using QuotationCryptocurrency.Models;
 
 namespace QuotationCryptocurrency
 {
@@ -44,6 +45,9 @@ namespace QuotationCryptocurrency
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<QuotationContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("QuotationConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

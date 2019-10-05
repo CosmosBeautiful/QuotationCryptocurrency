@@ -22,7 +22,7 @@ namespace QuotationCryptocurrency.Tests.Quotation
 
             Mock<IParser> mockParser = new Mock<IParser>();
             mockParser
-               .Setup(repo => repo.ParsersyQuotationFromRequest(It.IsAny<IModel>()))
+               .Setup(repo => repo.Parse(It.IsAny<IModel>()))
                .Returns(new List<IModel>());
 
             var quotation = new Quotations.Quotation(mockRequest.Object, mockParser.Object);

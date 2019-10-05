@@ -5,6 +5,6 @@ namespace QuotationCryptocurrency.Parsers
 {
     public interface IParser
     {
-        List<IModel> ParsersyQuotationFromRequest(IModel response);
+        List<IModel> Parse(IModel models);
     }
 }

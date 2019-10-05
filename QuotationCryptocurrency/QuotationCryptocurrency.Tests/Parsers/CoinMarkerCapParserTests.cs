@@ -95,7 +95,7 @@ namespace QuotationCryptocurrency.Tests.Parsers
             List<IModel> equationModels = CreateCryptocurrencyQuotationModels();
 
             //act
-            List<IModel> actualModels = parser.ParsersyQuotationFromRequest(responseCoinMarkerCapParams);
+            List<IModel> actualModels = parser.Parse(responseCoinMarkerCapParams);
 
             //assert
             CollectionAssert.AreEqual(equationModels, actualModels);

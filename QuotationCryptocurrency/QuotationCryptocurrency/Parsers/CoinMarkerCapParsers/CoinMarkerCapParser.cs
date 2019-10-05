@@ -15,7 +15,7 @@ namespace QuotationCryptocurrency.Parsers
             _mapper = mapper;
         }
 
-        public List<IModel> ParsersyQuotationFromRequest(IModel response)
+        public List<IModel> Parse(IModel response)
         {
             CoinMarkerCapParams parapms = (CoinMarkerCapParams)response;
 

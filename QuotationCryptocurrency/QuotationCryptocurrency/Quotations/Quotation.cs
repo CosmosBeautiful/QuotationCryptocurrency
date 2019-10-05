@@ -20,7 +20,7 @@ namespace QuotationCryptocurrency.Quotations
         {
             IModel response = _request.Send();
 
-            IEnumerable<IModel> list = _parser.ParsersyQuotationFromRequest(response);
+            IEnumerable<IModel> list = _parser.Parse(response);
 
             return list;
         }
