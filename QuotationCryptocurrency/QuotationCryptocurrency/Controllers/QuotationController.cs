@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QuotationCryptocurrency.FilterModels.Quotation;
 using QuotationCryptocurrency.Models;
 using QuotationCryptocurrency.Quotations;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 
@@ -24,15 +26,7 @@ namespace QuotationCryptocurrency.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Indexq(int pageData = 1, QuotationSortType sortOrder = QuotationSortType.None, string selectedName = "")
-        {
-            IEnumerable<QuotationModel> quotations = _quotation.GetQuotation().Cast<QuotationModel>();
-
-            var viewModel = new QuotationViewModel(quotations, pageData, sortOrder, selectedName);
-            return View(viewModel);
-        }
-
-        public IActionResult IndexDB(int pageData = 1, QuotationSortType sortOrder = QuotationSortType.None, string selectedName = "")
+        public IActionResult Index(int pageData = 1, QuotationSortType sortOrder = QuotationSortType.None, string selectedName = "")
         {
             List<QuotationView> quotationsView = db.QuotationsView.ToList();
 
@@ -43,8 +37,34 @@ namespace QuotationCryptocurrency.Controllers
             }
 
             var viewModel = new QuotationViewModel(quotations, pageData, sortOrder, selectedName);
-
             return View("Index", viewModel);
+        }
+
+        public IActionResult Load()
+        {
+            IEnumerable<QuotationModel> quotations = _quotation.GetQuotation().Cast<QuotationModel>();
+
+            foreach (var item in quotations)
+            {
+                //(if) Find
+                //try
+
+                Quote quote = new Quote()
+                {
+                    CryptoId = item.Id,
+                    Price = item.Price,
+                    PercentChange1h = item.PercentChange1h,
+                    PercentChange24h = item.PercentChange24h,
+                    MarketCap = item.MarketCap,
+                    LastUpdated = item.LastUpdated,
+                };
+
+                db.Quotes.Add(quote);
+            }
+
+            db.SaveChanges();
+
+            return RedirectPermanent("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
