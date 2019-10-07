@@ -41,19 +41,6 @@ namespace QuotationCryptocurrency.Repository
             return quotations;
         }
 
-        public QuotationViewModel CreateViewModel(List<QuotationView> quotationsView, int pageData = 1, QuotationSortType sortOrder = QuotationSortType.None, string selectedName = "")
-        {
-            List<QuotationModel> quotations = new List<QuotationModel>();
-            foreach (var item in quotationsView)
-            {
-                quotations.Add(_mapper.Map<QuotationModel>(item));
-            }
-
-            var viewModel = new QuotationViewModel(quotations, pageData, sortOrder, selectedName);
-
-            return viewModel;
-        }
-
         public void UpdateQuotes()
         {
             IEnumerable<QuotationModel> quotations = _quotation.GetQuotation().Cast<QuotationModel>();

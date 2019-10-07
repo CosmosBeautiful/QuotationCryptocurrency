@@ -1,11 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace QuotationCryptocurrency.Models
 {
     public class PageNavigation
     {
+        [JsonProperty]
         public int PageNumber { get; private set; }
+
+        [JsonProperty]
         public int TotalPages { get; private set; }
+
+        [JsonProperty]
         public int PageSize { get; private set; }
 
         public bool HasPreviousPage
@@ -24,11 +30,15 @@ namespace QuotationCryptocurrency.Models
             }
         }
 
-        public PageNavigation(int count, int pageNumber, int pageSize = 10)
+        public PageNavigation(int pageNumber, int pageSize = 10)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+        }
+
+        public void SetCountElements(int count)
+        {
+            TotalPages = (int)Math.Ceiling(count / (double)PageSize);
         }
     }
 }

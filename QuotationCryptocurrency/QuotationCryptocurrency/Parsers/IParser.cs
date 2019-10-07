@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 namespace QuotationCryptocurrency.Parsers
 {
-    public interface IParser
+    public interface IParser<TResult, TInput>  
+        where TResult : IModel 
+        where TInput : IModel
     {
-        List<IModel> Parse(IModel models);
+        List<TResult> Parse(List<TInput> models);
     }
 }

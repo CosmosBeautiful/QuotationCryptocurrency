@@ -1,16 +1,18 @@
 ﻿using QuotationCryptocurrency.Models;
 using QuotationCryptocurrency.Parsers;
 using QuotationCryptocurrency.Requests;
+using QuotationCryptocurrency.Requests.CoinMarkerCap;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuotationCryptocurrency.Quotations
 {
     public class Quotation : IQuotation
     {
         private readonly IRequest _request;
-        private readonly IParser _parser;
+        private readonly IParser<QuotationModel, CoinMarkerCapDataParams> _parser;
 
-        public Quotation(IRequest request, IParser parser)
+        public Quotation(IRequest request, IParser<QuotationModel, CoinMarkerCapDataParams> parser)
         {
             _request = request;
             _parser = parser;
@@ -18,9 +20,9 @@ namespace QuotationCryptocurrency.Quotations
 
         public IEnumerable<IModel> GetQuotation()
         {
-            IModel response = _request.Send();
+            CoinMarkerCapParams response = (CoinMarkerCapParams)_request.Send();
 
-            IEnumerable<IModel> list = _parser.Parse(response);
+            IEnumerable<IModel> list = _parser.Parse(response.Data.ToList());
 
             return list;
         }

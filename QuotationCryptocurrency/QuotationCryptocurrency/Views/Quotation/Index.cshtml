@@ -4,78 +4,65 @@
 
 @addTagHelper "*, QuotationCryptocurrency"
 
-@model QuotationViewModel
+@model IEnumerable<QuotationModel>
 @{
     ViewBag.Title = "Index";
+    QuotationViewModel ViewModel = TempData.Peek<QuotationViewModel>("quotationsViewModel");
 }
     <div>
         <h2>Quotation Cryptocurrency</h2>
         <hr />
 
-        <form method="get">
-            <div class="form-inline">
-                <label class="control-label">Name:&nbsp;</label>
-                @Html.TextBox("selectedName", Model.FilterModel.SelectedName, htmlAttributes: new { @class = "form-control" })
-
-                <input type="submit" value="Фильтр" class="btn btn-default" />
-            </div>
-        </form>
+        @await Html.PartialAsync("_Filter", ViewModel.FilterModel)
         <br />
 
         <table class="table table-striped">
             <tr>
                 <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortModel.NameSort)"
-                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                    <a asp-action="Sort"
+                       asp-route-sortOrder="@(ViewModel.SortModel.NameSort)">
                         Name
                     </a>
                 </th>
                 <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortModel.SymbolSort)"
-                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                    <a asp-action="Sort"
+                       asp-route-sortOrder="@(ViewModel.SortModel.SymbolSort)">
                         Symbol
                     </a>
                 </th>
                 <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortModel.PriceSort)"
-                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                    <a asp-action="Sort"
+                       asp-route-sortOrder="@(ViewModel.SortModel.PriceSort)">
                         Price
                     </a>
                 </th>
                 <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortModel.PercentChange1hSort)"
-                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                    <a asp-action="Sort"
+                       asp-route-sortOrder="@(ViewModel.SortModel.PercentChange1hSort)">
                         PercentChange1h
                     </a>
                 </th>
                 <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortModel.PercentChange24hSort)"
-                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                    <a asp-action="Sort"
+                       asp-route-sortOrder="@(ViewModel.SortModel.PercentChange24hSort)">
                         PercentChange24hSort
                     </a>
                 </th>
                 <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortModel.MarketCapSort)"
-                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                    <a asp-action="Sort"
+                       asp-route-sortOrder="@(ViewModel.SortModel.MarketCapSort)">
                         MarketCap
                     </a>
                 </th>
                 <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@(Model.SortModel.LastUpdatedSort)"
-                       asp-route-selectedName="@(Model.FilterModel.SelectedName)">
+                    <a asp-action="Sort"
+                       asp-route-sortOrder="@(ViewModel.SortModel.LastUpdatedSort)">
                         LastUpdated
                     </a>
                 </th>
             </tr>
 
-            @foreach (QuotationModel item in Model.Quotations)
+            @foreach (QuotationModel item in Model)
             {
                 <tr>
                     <td>
@@ -104,29 +91,5 @@
             }
         </table>
 
-        <div class="container">
-            <div class="d-flex flex-row">
-                @if (Model.PageNavigation.HasPreviousPage)
-                {
-                    <div class="page-item">
-                        <a asp-action="Index"
-                           asp-route-pageData="@(Model.PageNavigation.PageNumber - 1)" class="page-link">
-                            Back
-                        </a>
-                    </div>
-
-                }
-                <page-link page-navigation="Model.PageNavigation" page-action="Index"></page-link>
-                @if (Model.PageNavigation.HasNextPage)
-                {
-
-                    <div class="page-item">
-                        <a asp-action="Index"
-                           asp-route-pageData="@(Model.PageNavigation.PageNumber + 1)" class="page-link">
-                            Next
-                        </a>
-                    </div>
-                }
-            </div>
-        </div>
+        @await Html.PartialAsync("_Navigation", ViewModel.PageNavigation)
     </div>

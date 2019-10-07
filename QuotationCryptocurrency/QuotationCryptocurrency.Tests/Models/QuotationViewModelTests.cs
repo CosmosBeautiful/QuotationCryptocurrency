@@ -99,11 +99,13 @@ namespace QuotationCryptocurrency.Tests.Models
             List<QuotationModel> equationQuotation = CreateEquationQuotationViewModel();
 
             //act
-            QuotationViewModel actualQuotation = new QuotationViewModel(quotations, page, sortType, selectedName);
+            QuotationViewModel actualQuotationViewModel = new QuotationViewModel(page, sortType, selectedName);
+            IEnumerable<QuotationModel> quotationModel = actualQuotationViewModel.GetSortedQuotationModel(quotations);
 
             //assert
-            var actualListQuotation = actualQuotation.Quotations.ToList();
-            CollectionAssert.AreEqual(equationQuotation, actualListQuotation);
+            var actualQuotationModel = quotationModel.ToList();
+
+            CollectionAssert.AreEqual(equationQuotation, actualQuotationModel);
         }
     }
 }

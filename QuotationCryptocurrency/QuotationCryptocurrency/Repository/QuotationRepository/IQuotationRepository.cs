@@ -11,8 +11,6 @@ namespace QuotationCryptocurrency.Repository
     {
         List<QuotationView> Get();
         
-        QuotationViewModel CreateViewModel(List<QuotationView> quotationsView, int pageData, QuotationSortType sortOrder, string selectedName);
-
         void UpdateQuotes();
     }
 }

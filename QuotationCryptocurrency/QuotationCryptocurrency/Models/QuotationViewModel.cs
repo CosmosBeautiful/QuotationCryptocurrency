@@ -8,28 +8,34 @@ namespace QuotationCryptocurrency.Models
 {
     public class QuotationViewModel
     {
-        public IEnumerable<QuotationModel> Quotations { get; set; }
         public PageNavigation PageNavigation { get; set; }
         public QuotationSortModel SortModel { get; set; }
         public QuotationFilters FilterModel { get; set; }
 
-        public QuotationViewModel(IEnumerable<QuotationModel> quotations, int page, QuotationSortType sortType, string selectedName) 
+        public QuotationViewModel(int page, QuotationSortType sortType, string selectedName) 
         {
-            Quotations = quotations;
             SortModel = new QuotationSortModel(sortType);
             FilterModel = new QuotationFilters(selectedName);
-            PageNavigation = new PageNavigation(Quotations.Count(), page);
+            PageNavigation = new PageNavigation(page);
 
-            Quotations = GetFilterQuotations(Quotations, selectedName);
-            Quotations = GetSortQuotations(Quotations, sortType);
-            Quotations = GetSelectedElementsQuotations(Quotations, page);
         }
 
-        private IEnumerable<QuotationModel> GetSortQuotations(IEnumerable<QuotationModel> quotations, QuotationSortType sortType)
+        public IEnumerable<QuotationModel> GetSortedQuotationModel(IEnumerable<QuotationModel> quotations)
+        {
+            IEnumerable<QuotationModel> sortedQuotations = quotations;
+
+            sortedQuotations = GetFilteredQuotations(sortedQuotations);
+            sortedQuotations = GetSortedQuotations(sortedQuotations);
+            sortedQuotations = GetSelectedElementsQuotations(sortedQuotations);
+
+            return sortedQuotations;
+        }
+
+        private IEnumerable<QuotationModel> GetSortedQuotations(IEnumerable<QuotationModel> quotations)
         {
             IEnumerable<QuotationModel> sortQuotations; 
 
-            switch (sortType)
+            switch (SortModel.SortOrder)
             {
                 case QuotationSortType.IdAsc:
                     sortQuotations = quotations.OrderBy(s => s.Id);
@@ -87,22 +93,45 @@ namespace QuotationCryptocurrency.Models
             return sortQuotations;
         }
 
-        private IEnumerable<QuotationModel> GetFilterQuotations(IEnumerable<QuotationModel> quotations, string selectedName)
+        private IEnumerable<QuotationModel> GetFilteredQuotations(IEnumerable<QuotationModel> quotations)
         {
             IEnumerable<QuotationModel> filterQuotations = quotations;
 
-            if (!String.IsNullOrEmpty(selectedName))
+            if (!String.IsNullOrEmpty(FilterModel.SelectedName))
             {
-                filterQuotations = quotations.Where(p => p.Name.Contains(selectedName));
+                filterQuotations = filterQuotations.Where(p => p.Name.Contains(FilterModel.SelectedName));
+            }
+            if (!String.IsNullOrEmpty(FilterModel.SelectedSymbol))
+            {
+                filterQuotations = filterQuotations.Where(p => p.Symbol.Contains(FilterModel.SelectedSymbol));
             }
 
             return filterQuotations;
         }
 
-        private IEnumerable<QuotationModel> GetSelectedElementsQuotations(IEnumerable<QuotationModel> quotations, int page)
+        private IEnumerable<QuotationModel> GetSelectedElementsQuotations(IEnumerable<QuotationModel> quotations)
         {
-            IEnumerable<QuotationModel> selectedElementsQuotations = quotations.Skip((page - 1) * PageNavigation.PageSize).Take(PageNavigation.PageSize).ToList();
+            PageNavigation.SetCountElements(quotations.Count());
+            IEnumerable<QuotationModel> selectedElementsQuotations = quotations.Skip((PageNavigation.PageNumber - 1) * PageNavigation.PageSize).Take(PageNavigation.PageSize).ToList();
             return selectedElementsQuotations;
+        }
+
+        public IEnumerable<QuotationModel> GetSortModel(IEnumerable<QuotationModel> quotations, QuotationSortModel sortModel)
+        {
+            SortModel = sortModel;
+            return GetSortedQuotationModel(quotations);
+        }
+
+        public IEnumerable<QuotationModel> GetFilterModel(IEnumerable<QuotationModel> quotations, QuotationFilters filterModel)
+        {
+            FilterModel = filterModel;
+            return GetSortedQuotationModel(quotations);
+        }
+
+        public IEnumerable<QuotationModel> GetPage(IEnumerable<QuotationModel> quotations, int page)
+        {
+            PageNavigation = new PageNavigation(page);
+            return GetSortedQuotationModel(quotations);
         }
     }
 }

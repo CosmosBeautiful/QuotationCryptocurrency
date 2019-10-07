@@ -4,7 +4,7 @@ using System;
 
 namespace QuotationCryptocurrency.Requests.CoinMarkerCap
 {
-    public class CoinMarkerCapDataParams
+    public class CoinMarkerCapDataParams : IModel
     {
         [JsonProperty("id")]
         public int Id { get; set; }

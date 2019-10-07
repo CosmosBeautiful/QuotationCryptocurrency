@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace QuotationCryptocurrency.Parsers
 {
-    public class CoinMarkerCapParser : IParser
+    public class CoinMarkerCapParser : IParser<QuotationModel, CoinMarkerCapDataParams>
     {
         private readonly IMapper _mapper;
 
@@ -15,13 +15,11 @@ namespace QuotationCryptocurrency.Parsers
             _mapper = mapper;
         }
 
-        public List<IModel> Parse(IModel response)
+        public List<QuotationModel> Parse(List<CoinMarkerCapDataParams> responseData)
         {
-            CoinMarkerCapParams parapms = (CoinMarkerCapParams)response;
+            List<QuotationModel> list = new List<QuotationModel>();
 
-            List<IModel> list = new List<IModel>();
-
-            foreach (var item in parapms.Data)
+            foreach (var item in responseData)
             {
                 list.Add(_mapper.Map<QuotationModel>(item));
             }

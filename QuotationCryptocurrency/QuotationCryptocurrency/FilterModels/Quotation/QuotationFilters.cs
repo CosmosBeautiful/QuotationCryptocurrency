@@ -4,11 +4,17 @@ namespace QuotationCryptocurrency.FilterModels.Quotation
 {
     public class QuotationFilters
     {
-        public string SelectedName { get; private set; }
+        public string SelectedName { get; set; } = "";
+        public string SelectedSymbol { get; set; } = "";
 
-        public QuotationFilters(string name = "")
+        public QuotationFilters()
+        {
+        }
+
+        public QuotationFilters(string name = "", string symbol = "")
         {
             SelectedName = name;
+            SelectedSymbol = symbol;
         }
     }
 }

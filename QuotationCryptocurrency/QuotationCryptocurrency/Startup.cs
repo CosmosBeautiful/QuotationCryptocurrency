@@ -21,6 +21,7 @@ using QuotationCryptocurrency.Parsers;
 using QuotationCryptocurrency.Configurations;
 using QuotationCryptocurrency.Models;
 using QuotationCryptocurrency.Repository;
+using QuotationCryptocurrency.Requests.CoinMarkerCap;
 
 namespace QuotationCryptocurrency
 {
@@ -67,7 +68,8 @@ namespace QuotationCryptocurrency
 
             services.AddTransient<IRequest, CoinMarkerCapHttpRequest>();
             services.AddTransient<IQuotation, Quotation>();
-            services.AddTransient<IParser, CoinMarkerCapParser>();
+            services.AddTransient<IParser<QuotationModel, CoinMarkerCapDataParams>, CoinMarkerCapParser>();
+            services.AddTransient<IParser<QuotationModel, QuotationView>, QuotationRepositoryParser>();
 
             services.AddTransient<IQuotationRepository, QuotationRepository>();
 
@@ -85,7 +87,6 @@ namespace QuotationCryptocurrency
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
