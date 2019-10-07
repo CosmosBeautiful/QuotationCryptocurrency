@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuotationCryptocurrency.Quotations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,5 +22,15 @@ namespace QuotationCryptocurrency.Models
         [ForeignKey("CryptoId")]
         public ICollection<Quote> Quotes { get; set; }
 
+        public Crypto()
+        {
+        }
+
+        public Crypto(QuotationModel quotation)
+        {
+            Id = quotation.Id;
+            Name = quotation.Name;
+            Symbol = quotation.Symbol;
+        }
     }
 }

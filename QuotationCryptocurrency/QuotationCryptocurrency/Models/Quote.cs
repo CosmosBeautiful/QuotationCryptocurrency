@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuotationCryptocurrency.Quotations;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,10 +29,18 @@ namespace QuotationCryptocurrency.Models
         [Column("date_updated")]
         public DateTime LastUpdated { get; set; }
 
+        public Quote()
+        { 
+        }
 
-        //public int CryptoInfoKey { get; set; }
-
-        //[ForeignKey("CryptoInfoKey")]
-        //public Crypto Crypto { get; set; }
+        public Quote(QuotationModel quotation)
+        {
+            CryptoId = quotation.Id;
+            Price = quotation.Price;
+            PercentChange1h = quotation.PercentChange1h;
+            PercentChange24h = quotation.PercentChange24h;
+            MarketCap = quotation.MarketCap;
+            LastUpdated = quotation.LastUpdated;
+        }
     }
 }

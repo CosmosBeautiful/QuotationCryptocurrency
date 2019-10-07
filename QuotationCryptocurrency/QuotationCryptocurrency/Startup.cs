@@ -20,6 +20,7 @@ using QuotationCryptocurrency.Requests;
 using QuotationCryptocurrency.Parsers;
 using QuotationCryptocurrency.Configurations;
 using QuotationCryptocurrency.Models;
+using QuotationCryptocurrency.Repository;
 
 namespace QuotationCryptocurrency
 {
@@ -67,6 +68,8 @@ namespace QuotationCryptocurrency
             services.AddTransient<IRequest, CoinMarkerCapHttpRequest>();
             services.AddTransient<IQuotation, Quotation>();
             services.AddTransient<IParser, CoinMarkerCapParser>();
+
+            services.AddTransient<IQuotationRepository, QuotationRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
