@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuotationCryptocurrency.FilterModels.Quotation;
 using QuotationCryptocurrency.Models;
-using QuotationCryptocurrency.Parsers;
 using QuotationCryptocurrency.Quotations;
 using QuotationCryptocurrency.Repository;
 using System.Collections.Generic;
@@ -9,78 +9,66 @@ using System.Diagnostics;
 
 namespace QuotationCryptocurrency.Controllers
 {
+    [Authorize]
     public class QuotationController : Controller
     {
         private readonly IQuotationRepository _quotationRepository;
 
-        private readonly IParser<QuotationModel, QuotationView> _parser;
 
-        public QuotationController(IQuotationRepository quotationRepository, IParser<QuotationModel, QuotationView> parser)
+        public QuotationController(IQuotationRepository quotationRepository)
         {
             _quotationRepository = quotationRepository;
-            _parser = parser;
         }
 
         public IActionResult Index(int pageData = 1, QuotationSortType sortOrder = QuotationSortType.None, string selectedName = "")
         {
-            List<QuotationView> quotationsView = _quotationRepository.Get();
+            List<QuotationModel> quotationsView = _quotationRepository.Get();
 
             QuotationViewModel quotationsViewModel = new QuotationViewModel(pageData, sortOrder, selectedName);
-
-            IEnumerable<QuotationModel> quotationModels = _parser.Parse(quotationsView);
-            quotationModels =  quotationsViewModel.GetSortedQuotationModel(quotationModels);
+            IEnumerable<QuotationModel> quotationModels =  quotationsViewModel.GetSortedQuotationModel(quotationsView);
 
             TempData.Set("quotationsViewModel", quotationsViewModel);
-
             return View("Index", quotationModels);
         }
 
         public IActionResult Sort(QuotationSortType sortOrder = QuotationSortType.None)
         {
-            List<QuotationView> quotationsView = _quotationRepository.Get();
-            IEnumerable<QuotationModel> quotationModels = _parser.Parse(quotationsView);
+            List<QuotationModel> quotationsView = _quotationRepository.Get();
+            QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
 
             QuotationSortModel SortModel = new QuotationSortModel(sortOrder);
+            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetSortModel(quotationsView, SortModel);
 
-            var quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
-
-            quotationModels = quotationsViewModel.GetSortModel(quotationModels, SortModel);
             TempData.Set("quotationsViewModel", quotationsViewModel);
-
             return View("Index", quotationModels);
         }
 
 
-        public IActionResult Filter(QuotationFilters quotationFilters)
+        public IActionResult Filter(QuotationFilters quotationFilters = null)
         {
-            List<QuotationView> quotationsView = _quotationRepository.Get();
-            IEnumerable<QuotationModel> quotationModels = _parser.Parse(quotationsView);
+            List<QuotationModel> quotationsView = _quotationRepository.Get();
+            QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
 
-            var quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
+            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetFilterModel(quotationsView, quotationFilters);
 
-            quotationModels = quotationsViewModel.GetFilterModel(quotationModels, quotationFilters);
             TempData.Set("quotationsViewModel", quotationsViewModel);
-
             return View("Index", quotationModels);
         }
 
         public IActionResult Page(int pageData = 1)
         {
-            List<QuotationView> quotationsView = _quotationRepository.Get();
-            IEnumerable<QuotationModel> quotationModels = _parser.Parse(quotationsView);
+            List<QuotationModel> quotationsView = _quotationRepository.Get();
+            QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
 
-            var quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
+            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetPage(quotationsView, pageData);
 
-            quotationModels = quotationsViewModel.GetPage(quotationModels, pageData);
             TempData.Set("quotationsViewModel", quotationsViewModel);
-
             return View("Index", quotationModels);
         }
 
-        public IActionResult Load()
+        public IActionResult Update()
         {
             _quotationRepository.UpdateQuotes();
-
             return RedirectPermanent("Index");
         }
 

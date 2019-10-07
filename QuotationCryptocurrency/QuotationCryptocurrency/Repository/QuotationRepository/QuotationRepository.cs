@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using QuotationCryptocurrency.FilterModels.Quotation;
 using QuotationCryptocurrency.Models;
+using QuotationCryptocurrency.Parsers;
 using QuotationCryptocurrency.Quotations;
 using System;
 using System.Collections.Generic;
@@ -11,21 +12,19 @@ namespace QuotationCryptocurrency.Repository
     public class QuotationRepository : IQuotationRepository
     {
         private readonly QuotationContext db;
-
         private readonly IQuotation _quotation;
+        private readonly IParser<QuotationModel, QuotationView> _parser;
 
-        private readonly IMapper _mapper;
-
-        public QuotationRepository(QuotationContext context, IQuotation quotation, IMapper mapper)
+        public QuotationRepository(QuotationContext context, IQuotation quotation, IParser<QuotationModel, QuotationView> parser)
         {
             db = context;
             _quotation = quotation;
-            _mapper = mapper;
+            _parser = parser;
         }
 
-        private bool IsСryptExist(List<QuotationView> quotationsView, QuotationModel item)
+        private bool IsСryptNotExist(List<QuotationView> quotationsView, QuotationModel item)
         {
-            return (quotationsView.Find(x => x.Id == item.Id) == null);
+            return quotationsView.Find(x => x.Id == item.Id) == null;
         }
 
         private void AddCrypto(QuotationModel quotation)
@@ -35,10 +34,11 @@ namespace QuotationCryptocurrency.Repository
             db.SaveChanges();
         }
 
-        public List<QuotationView> Get()
+        public List<QuotationModel> Get()
         {
-            List<QuotationView> quotations = db.QuotationsView.ToList();
-            return quotations;
+            List<QuotationView> quotationsView = db.QuotationsView.ToList();
+            List<QuotationModel> quotationModels = _parser.Parse(quotationsView);
+            return quotationModels;
         }
 
         public void UpdateQuotes()
@@ -48,7 +48,7 @@ namespace QuotationCryptocurrency.Repository
 
             foreach (QuotationModel item in quotations)
             {
-                if (!IsСryptExist(quotationsView, item))
+                if (IsСryptNotExist(quotationsView, item))
                 {
                     AddCrypto(item);
                 }

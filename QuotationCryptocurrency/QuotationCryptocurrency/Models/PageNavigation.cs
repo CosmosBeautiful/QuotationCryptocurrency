@@ -39,6 +39,7 @@ namespace QuotationCryptocurrency.Models
         public void SetCountElements(int count)
         {
             TotalPages = (int)Math.Ceiling(count / (double)PageSize);
+            PageNumber = (PageNumber > TotalPages) ? TotalPages : PageNumber;
         }
     }
 }

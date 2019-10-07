@@ -4,11 +4,15 @@
 
 @using (Html.BeginForm("Filter", "Quotation"))
 {
-    <label class="control-label">Name:&nbsp;</label>
-    @Html.TextBox("SelectedName", Model.SelectedName, htmlAttributes: new { @class = "form-control" })
-
-    <label class="control-label">Symbol:&nbsp;</label>
-    @Html.TextBox("SelectedSymbol", Model.SelectedSymbol, htmlAttributes: new { @class = "form-control" })
-
-    <input type="submit" value="Фильтр" class="btn btn-default" />
+    <div class="form-row">
+        <div class="col">
+            <label class="control-label">Name:&nbsp;</label>
+            @Html.TextBox("SelectedName", Model.SelectedName, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="col">
+            <label class="control-label">Symbol:&nbsp;</label>
+            @Html.TextBox("SelectedSymbol", Model.SelectedSymbol, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <input type="submit" value="Фильтр" class="btn btn-primary" />
+    </div>
 }
