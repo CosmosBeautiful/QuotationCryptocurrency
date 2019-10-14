@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace QuotationCryptocurrency.Requests.CoinMarkerCap
+namespace QuotationCryptocurrency.Request.Parameters
 {
-    public class CointMarkerCapCurrencyParams
+    public class CointMarkerCapCurrencyParam
     {
         [JsonProperty("price")]
         public double Price { get; set; }

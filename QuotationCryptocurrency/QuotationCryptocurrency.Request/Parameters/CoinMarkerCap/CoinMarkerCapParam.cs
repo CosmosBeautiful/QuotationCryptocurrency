@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
-using QuotationCryptocurrency.Models;
 using System;
 
-namespace QuotationCryptocurrency.Requests.CoinMarkerCap
+namespace QuotationCryptocurrency.Request.Parameters
 {
-    public class CoinMarkerCapDataParams : IModel
+    public class CoinMarkerCapParam : IParam
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -18,7 +17,7 @@ namespace QuotationCryptocurrency.Requests.CoinMarkerCap
         [JsonProperty("slug")]
         public string Slug { get; set; }
 
-        [JsonProperty("num_marker_pairs")]
+        [JsonProperty("num_market_pairs")]
         public int NumMarkerPairs { get; set; }
 
         [JsonProperty("date_added")]
@@ -37,6 +36,6 @@ namespace QuotationCryptocurrency.Requests.CoinMarkerCap
         public DateTime LastUpdated { get; set; }
 
         [JsonProperty("quote")]
-        public CointMarkerCapQuoteParams Quote { get; set; }
+        public CointMarkerCapQuoteParam Quote { get; set; }
     }
 }
