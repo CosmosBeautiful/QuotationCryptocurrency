@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuotationCryptocurrency.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AutoMapper;
+using QuotationCryptocurrency.Business.Services;
+using QuotationCryptocurrency.Data;
+using QuotationCryptocurrency.Database;
+using QuotationCryptocurrency.Database.Repositories;
 using QuotationCryptocurrency.Mappings;
-using QuotationCryptocurrency.Quotations;
-using QuotationCryptocurrency.Requests;
-using QuotationCryptocurrency.Parsers;
-using QuotationCryptocurrency.Configurations;
-using QuotationCryptocurrency.Models;
-using QuotationCryptocurrency.Repository;
-using QuotationCryptocurrency.Requests.CoinMarkerCap;
+using QuotationCryptocurrency.Request;
+using QuotationCryptocurrency.Request.Configurations;
+using QuotationCryptocurrency.Request.Parameters;
 
 namespace QuotationCryptocurrency
 {
@@ -49,7 +43,7 @@ namespace QuotationCryptocurrency
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<QuotationContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("QuotationConnection")));
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -60,18 +54,19 @@ namespace QuotationCryptocurrency
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new MappingProfile());
+                mc.AddProfile(new QuotationCryptocurrency.Mappings.MappingProfile());
+                mc.AddProfile(new QuotationCryptocurrency.Business.Mapper.MappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            services.AddTransient<IRequest, CoinMarkerCapHttpRequest>();
-            services.AddTransient<IQuotation, Quotation>();
-            services.AddTransient<IParser<QuotationModel, CoinMarkerCapDataParams>, CoinMarkerCapParser>();
-            services.AddTransient<IParser<QuotationModel, QuotationView>, QuotationRepositoryParser>();
-
+            services.AddTransient<IRequest<CoinMarkerCapParam>, CoinMarkerCapRequest>();
             services.AddTransient<IQuotationRepository, QuotationRepository>();
+            services.AddTransient<ICryptoRepository, CryptoRepository>();
+            services.AddTransient<IQuoteRepository, QuoteRepository>();
+
+            services.AddTransient<IQuotationService, QuotationService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

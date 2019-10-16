@@ -23,4 +23,14 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuotationCryptocurrency.Business\QuotationCryptocurrency.Business.csproj" />
+  </ItemGroup>
+
 </Project>

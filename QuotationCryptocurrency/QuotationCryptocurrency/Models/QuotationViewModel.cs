@@ -1,5 +1,4 @@
 ﻿using QuotationCryptocurrency.FilterModels.Quotation;
-using QuotationCryptocurrency.Quotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using QuotationCryptocurrency.Business.DTO;
+using QuotationCryptocurrency.Business.Services;
 using QuotationCryptocurrency.FilterModels.Quotation;
 using QuotationCryptocurrency.Models;
-using QuotationCryptocurrency.Quotations;
-using QuotationCryptocurrency.Repository;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -12,44 +13,53 @@ namespace QuotationCryptocurrency.Controllers
     [Authorize]
     public class QuotationController : Controller
     {
-        private readonly IQuotationRepository _quotationRepository;
+        private readonly IQuotationService _quotationService;
 
+        private readonly IMapper _mapper;
 
-        public QuotationController(IQuotationRepository quotationRepository)
+        public QuotationController(IQuotationService quotationService, IMapper mapper)
         {
-            _quotationRepository = quotationRepository;
-        }
+            _quotationService = quotationService;
+            _mapper = mapper;
+        } 
 
         public IActionResult Index(int pageData = 1, QuotationSortType sortOrder = QuotationSortType.None, string selectedName = "")
         {
-            List<QuotationModel> quotationsView = _quotationRepository.Get();
+
+            List<QuotationDTO> quotationsDTO = _quotationService.Get();
+            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
+
 
             QuotationViewModel quotationsViewModel = new QuotationViewModel(pageData, sortOrder, selectedName);
-            IEnumerable<QuotationModel> quotationModels =  quotationsViewModel.GetSortedQuotationModel(quotationsView);
+            IEnumerable<QuotationModel> quotationsSorted =  quotationsViewModel.GetSortedQuotationModel(quotations);
 
             TempData.Set("quotationsViewModel", quotationsViewModel);
-            return View("Index", quotationModels);
+            return View("Index", quotationsSorted);
         }
 
         public IActionResult Sort(QuotationSortType sortOrder = QuotationSortType.None)
         {
-            List<QuotationModel> quotationsView = _quotationRepository.Get();
+            List<QuotationDTO> quotationsDTO = _quotationService.Get();
+            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
+
             QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
 
             QuotationSortModel SortModel = new QuotationSortModel(sortOrder);
-            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetSortModel(quotationsView, SortModel);
+            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetSortModel(quotations, SortModel);
 
             TempData.Set("quotationsViewModel", quotationsViewModel);
             return View("Index", quotationModels);
         }
 
-
         public IActionResult Filter(QuotationFilters quotationFilters = null)
         {
-            List<QuotationModel> quotationsView = _quotationRepository.Get();
+
+            List<QuotationDTO> quotationsDTO = _quotationService.Get();
+            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
+
             QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
 
-            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetFilterModel(quotationsView, quotationFilters);
+            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetFilterModel(quotations, quotationFilters);
 
             TempData.Set("quotationsViewModel", quotationsViewModel);
             return View("Index", quotationModels);
@@ -57,10 +67,12 @@ namespace QuotationCryptocurrency.Controllers
 
         public IActionResult Page(int pageData = 1)
         {
-            List<QuotationModel> quotationsView = _quotationRepository.Get();
+            List<QuotationDTO> quotationsDTO = _quotationService.Get();
+            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
+
             QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
 
-            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetPage(quotationsView, pageData);
+            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetPage(quotations, pageData);
 
             TempData.Set("quotationsViewModel", quotationsViewModel);
             return View("Index", quotationModels);
@@ -68,7 +80,7 @@ namespace QuotationCryptocurrency.Controllers
 
         public IActionResult Update()
         {
-            _quotationRepository.UpdateQuotes();
+            _quotationService.Update();
             return RedirectPermanent("Index");
         }
 

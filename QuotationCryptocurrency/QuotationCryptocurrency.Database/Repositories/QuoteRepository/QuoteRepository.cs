@@ -1,7 +1,7 @@
 ﻿using QuotationCryptocurrency.Database.Models;
 using System.Collections.Generic;
 
-namespace QuotationCryptocurrency.Database.Repositories.QuoteRepository
+namespace QuotationCryptocurrency.Database.Repositories
 {
     public class QuoteRepository : IQuoteRepository
     {

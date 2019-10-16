@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace QuotationCryptocurrency.Database.Repositories.CryptoRepository
+namespace QuotationCryptocurrency.Database.Repositories
 {
     public class CryptoRepository : ICryptoRepository
     {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuotationCryptocurrency.FilterModels.Quotation;
 using QuotationCryptocurrency.Models;
-using QuotationCryptocurrency.Quotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +19,7 @@ namespace QuotationCryptocurrency.Tests.Models
                 new QuotationModel()
                 {
                     Id = 1,
+                    CryptoId = 1,
                     Name = "Bitcoin",
                     Symbol = "BTC",
                     Price = 8226.69420583,
@@ -31,6 +31,7 @@ namespace QuotationCryptocurrency.Tests.Models
                 new QuotationModel()
                 {
                     Id = 1,
+                    CryptoId = 1,
                     Name = "Ethereum",
                     Symbol = "ETH",
                     Price = 169.11,
@@ -42,6 +43,7 @@ namespace QuotationCryptocurrency.Tests.Models
                 new QuotationModel()
                 {
                     Id = 1,
+                    CryptoId = 1,
                     Name = "Bitcoin Cash",
                     Symbol = "BCH",
                     Price = 218.40,
@@ -62,6 +64,7 @@ namespace QuotationCryptocurrency.Tests.Models
                 new QuotationModel()
                 {
                     Id = 1,
+                    CryptoId = 1,
                     Name = "Bitcoin Cash",
                     Symbol = "BCH",
                     Price = 218.40,
@@ -73,6 +76,7 @@ namespace QuotationCryptocurrency.Tests.Models
                 new QuotationModel()
                 {
                     Id = 1,
+                    CryptoId = 1,
                     Name = "Bitcoin",
                     Symbol = "BTC",
                     Price = 8226.69420583,

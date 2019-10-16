@@ -1,5 +1,4 @@
 ﻿@using QuotationCryptocurrency.Models
-@using QuotationCryptocurrency.Quotations
 @using QuotationCryptocurrency.FilterModels.Quotation
 
 @addTagHelper "*, QuotationCryptocurrency"
@@ -16,7 +15,7 @@
         @await Html.PartialAsync("_Filter", ViewModel.FilterModel)
         <br />
         <div class="text-right">
-            <a asp-action="Update" class="link">Обновить котировки</a>
+            <a asp-action="Update" asp-route-update="true" class="link">Обновить котировки</a>
         </div>
         <br />
 
