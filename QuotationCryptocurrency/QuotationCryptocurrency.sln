@@ -16,7 +16,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotationCryptocurrency.Req
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0F6154A4-C8E0-4956-B152-9F28AA30490F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotationCryptocurrency.Request.Tests", "QuotationCryptocurrency.Request.Tests\QuotationCryptocurrency.Request.Tests.csproj", "{99276E1D-CC8D-4C4D-A3D5-48208B70FCAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotationCryptocurrency.Request.Tests", "QuotationCryptocurrency.Request.Tests\QuotationCryptocurrency.Request.Tests.csproj", "{99276E1D-CC8D-4C4D-A3D5-48208B70FCAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotationCryptocurrency.Database", "QuotationCryptocurrency.Database\QuotationCryptocurrency.Database.csproj", "{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotationCryptocurrency.Database.Tests", "QuotationCryptocurrency.Database.Tests\QuotationCryptocurrency.Database.Tests.csproj", "{6826CACC-4723-4C05-8431-7C9E73E09324}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +44,14 @@ Global
 		{99276E1D-CC8D-4C4D-A3D5-48208B70FCAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99276E1D-CC8D-4C4D-A3D5-48208B70FCAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99276E1D-CC8D-4C4D-A3D5-48208B70FCAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6826CACC-4723-4C05-8431-7C9E73E09324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6826CACC-4723-4C05-8431-7C9E73E09324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6826CACC-4723-4C05-8431-7C9E73E09324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6826CACC-4723-4C05-8431-7C9E73E09324}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +60,8 @@ Global
 		{435A1679-AEBD-4980-89A3-FC220AD456D6} = {0F6154A4-C8E0-4956-B152-9F28AA30490F}
 		{85346E7F-CDF5-4543-AA7B-ACDAD65576E1} = {DC718190-0C76-4C5A-887A-CB1761FC30EB}
 		{99276E1D-CC8D-4C4D-A3D5-48208B70FCAB} = {0F6154A4-C8E0-4956-B152-9F28AA30490F}
+		{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72} = {DC718190-0C76-4C5A-887A-CB1761FC30EB}
+		{6826CACC-4723-4C05-8431-7C9E73E09324} = {0F6154A4-C8E0-4956-B152-9F28AA30490F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11470E88-F256-4C8F-AA94-7E44060F6F21}
