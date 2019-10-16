@@ -26,19 +26,5 @@ namespace QuotationCryptocurrency.Database.Models
 
         [Column("date_updated")]
         public DateTime LastUpdated { get; set; }
-
-        public Quote()
-        {
-        }
-
-        //public Quote(QuotationModel quotation)
-        //{
-        //    CryptoId = quotation.Id;
-        //    Price = quotation.Price;
-        //    PercentChange1h = quotation.PercentChange1h;
-        //    PercentChange24h = quotation.PercentChange24h;
-        //    MarketCap = quotation.MarketCap;
-        //    LastUpdated = quotation.LastUpdated;
-        //}
     }
 }

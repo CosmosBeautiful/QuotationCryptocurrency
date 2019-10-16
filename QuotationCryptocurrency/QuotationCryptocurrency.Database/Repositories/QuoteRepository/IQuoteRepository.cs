@@ -1,4 +1,5 @@
 ﻿using QuotationCryptocurrency.Database.Models;
+using System.Collections.Generic;
 
 namespace QuotationCryptocurrency.Database.Repositories
 {
@@ -6,5 +7,6 @@ namespace QuotationCryptocurrency.Database.Repositories
     {
         void Add(Quote quote);
 
+        void AddRange(IEnumerable<Quote> quotes);
     }
 }

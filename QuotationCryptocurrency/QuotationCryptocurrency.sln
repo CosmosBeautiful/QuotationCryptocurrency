@@ -18,9 +18,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0F6154A4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotationCryptocurrency.Request.Tests", "QuotationCryptocurrency.Request.Tests\QuotationCryptocurrency.Request.Tests.csproj", "{99276E1D-CC8D-4C4D-A3D5-48208B70FCAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotationCryptocurrency.Database", "QuotationCryptocurrency.Database\QuotationCryptocurrency.Database.csproj", "{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotationCryptocurrency.Database", "QuotationCryptocurrency.Database\QuotationCryptocurrency.Database.csproj", "{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotationCryptocurrency.Database.Tests", "QuotationCryptocurrency.Database.Tests\QuotationCryptocurrency.Database.Tests.csproj", "{6826CACC-4723-4C05-8431-7C9E73E09324}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotationCryptocurrency.Database.Tests", "QuotationCryptocurrency.Database.Tests\QuotationCryptocurrency.Database.Tests.csproj", "{6826CACC-4723-4C05-8431-7C9E73E09324}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotationCryptocurrency.Business", "QuotationCryptocurrency.Business\QuotationCryptocurrency.Business.csproj", "{70006F0C-DA6F-4878-A43B-0AA356AF431C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{85346E7F-CDF5-4543-AA7B-ACDAD65576E1} = {85346E7F-CDF5-4543-AA7B-ACDAD65576E1}
+		{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72} = {8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotationCryptocurrency.Business.Tests", "QuotationCryptocurrency.Business.Tests\QuotationCryptocurrency.Business.Tests.csproj", "{C74C4236-B0BD-4051-B5D2-C2DFF4BBCFFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +60,14 @@ Global
 		{6826CACC-4723-4C05-8431-7C9E73E09324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6826CACC-4723-4C05-8431-7C9E73E09324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6826CACC-4723-4C05-8431-7C9E73E09324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70006F0C-DA6F-4878-A43B-0AA356AF431C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70006F0C-DA6F-4878-A43B-0AA356AF431C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70006F0C-DA6F-4878-A43B-0AA356AF431C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70006F0C-DA6F-4878-A43B-0AA356AF431C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C74C4236-B0BD-4051-B5D2-C2DFF4BBCFFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C74C4236-B0BD-4051-B5D2-C2DFF4BBCFFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C74C4236-B0BD-4051-B5D2-C2DFF4BBCFFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C74C4236-B0BD-4051-B5D2-C2DFF4BBCFFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +78,8 @@ Global
 		{99276E1D-CC8D-4C4D-A3D5-48208B70FCAB} = {0F6154A4-C8E0-4956-B152-9F28AA30490F}
 		{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72} = {DC718190-0C76-4C5A-887A-CB1761FC30EB}
 		{6826CACC-4723-4C05-8431-7C9E73E09324} = {0F6154A4-C8E0-4956-B152-9F28AA30490F}
+		{70006F0C-DA6F-4878-A43B-0AA356AF431C} = {DC718190-0C76-4C5A-887A-CB1761FC30EB}
+		{C74C4236-B0BD-4051-B5D2-C2DFF4BBCFFB} = {0F6154A4-C8E0-4956-B152-9F28AA30490F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11470E88-F256-4C8F-AA94-7E44060F6F21}
