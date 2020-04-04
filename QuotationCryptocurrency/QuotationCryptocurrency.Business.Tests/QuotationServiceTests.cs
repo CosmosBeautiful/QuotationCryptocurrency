@@ -48,52 +48,52 @@ namespace QuotationCryptocurrency.Business.Tests
         [TestMethod]
         public void Get()
         {
-            //arrange
-            var quotationsView = new List<Quotation>()
-            {
-                new Quotation()
-                {
-                    Id = 1,
-                    CryptoId = 1,
-                    Name = "Bitcoin",
-                    Symbol = "BTC",
-                    Price = 8226.69420583,
-                    PercentChange1h = 0.195943,
-                    PercentChange24h = 2.18019,
-                    MarketCap = 147763866698.346,
-                    LastUpdated = DateTime.Parse("2019-09-28T04:46:34.000Z")
-                }
-            };
-            var equationQuotationsDTO = new List<QuotationDTO>()
-            { 
-                new QuotationDTO()
-                {
-                    Id = 1,
-                    CryptoId = 1,
-                    Name = "Bitcoin",
-                    Symbol = "BTC",
-                    Price = 8226.69420583,
-                    PercentChange1h = 0.195943,
-                    PercentChange24h = 2.18019,
-                    MarketCap = 147763866698.346,
-                    LastUpdated = DateTime.Parse("2019-09-28T04:46:34.000Z")
-                }
-            };
+            ////arrange
+            //var quotationsView = new List<Quotation>()
+            //{
+            //    new Quotation()
+            //    {
+            //        Id = 1,
+            //        CryptoId = 1,
+            //        Name = "Bitcoin",
+            //        Symbol = "BTC",
+            //        Price = 8226.69420583,
+            //        PercentChange1h = 0.195943,
+            //        PercentChange24h = 2.18019,
+            //        MarketCap = 147763866698.346,
+            //        LastUpdated = DateTime.Parse("2019-09-28T04:46:34.000Z")
+            //    }
+            //};
+            //var equationQuotationsDTO = new List<QuotationDTO>()
+            //{ 
+            //    new QuotationDTO()
+            //    {
+            //        Id = 1,
+            //        CryptoId = 1,
+            //        Name = "Bitcoin",
+            //        Symbol = "BTC",
+            //        Price = 8226.69420583,
+            //        PercentChange1h = 0.195943,
+            //        PercentChange24h = 2.18019,
+            //        MarketCap = 147763866698.346,
+            //        LastUpdated = DateTime.Parse("2019-09-28T04:46:34.000Z")
+            //    }
+            //};
 
-            _mockQuotationRepository
-                .Setup(repo => repo.Get())
-                .Returns(quotationsView);
+            //_mockQuotationRepository
+            //    .Setup(repo => repo.Get())
+            //    .Returns(quotationsView);
 
-            IQuotationService quotationService = new QuotationService(
-                _mockQuotationRepository.Object, _mockCryptoRepository.Object, _mockQuoteRepository.Object,
-                _mockRequest.Object, _mapper
-                );
+            //IQuotationService quotationService = new QuotationService(
+            //    _mockQuotationRepository.Object, _mockCryptoRepository.Object, _mockQuoteRepository.Object,
+            //    _mockRequest.Object, _mapper
+            //    );
 
-            //act
-            List<QuotationDTO> actualQuotationsDTO = quotationService.Get();
+            ////act
+            //List<QuotationDTO> actualQuotationsDTO = quotationService.Get();
 
-            //assert
-            CollectionAssert.AreEqual(equationQuotationsDTO, actualQuotationsDTO);
+            ////assert
+            //CollectionAssert.AreEqual(equationQuotationsDTO, actualQuotationsDTO);
         }
     }
 }

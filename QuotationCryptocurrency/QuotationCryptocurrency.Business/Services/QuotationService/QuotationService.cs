@@ -33,27 +33,6 @@ namespace QuotationCryptocurrency.Business.Services
             _mapper = mapper;
         }
 
-        public List<QuotationDTO> Get()
-        {
-            List<Quotation> quotations = _quotationRepository.Get();
-            List<QuotationDTO> quotationsDTO = _mapper.Map<List<QuotationDTO>>(quotations);
-
-            return quotationsDTO;
-        }
-
-        private bool IsСryptNotExist(List<CryptoDTO> cryptos, QuotationDTO item)
-        {
-            return (cryptos.Find(x => x.Id == item.Id) == null);
-        }
-
-        private void CreateCrypto(QuotationDTO quotation)
-        {
-            CryptoDTO cryptoDTO = new CryptoDTO(quotation);
-            Crypto crypto = _mapper.Map<Crypto>(cryptoDTO);
-
-            _cryptoRepository.Add(crypto);
-        }
-
         public void Update()
         {
             List<CoinMarkerCapParam> coinMarkerCapParams = _request.Send();
@@ -77,6 +56,19 @@ namespace QuotationCryptocurrency.Business.Services
 
             List<Quote> newQuotes = _mapper.Map<List<Quote>>(newQuotesDTO);
             _quoteRepository.AddRange(newQuotes);
+        }
+
+        private bool IsСryptNotExist(List<CryptoDTO> cryptos, QuotationDTO item)
+        {
+            return (cryptos.Find(x => x.Id == item.Id) == null);
+        }
+
+        private void CreateCrypto(QuotationDTO quotation)
+        {
+            CryptoDTO cryptoDTO = new CryptoDTO(quotation);
+            Crypto crypto = _mapper.Map<Crypto>(cryptoDTO);
+
+            _cryptoRepository.Add(crypto);
         }
     }
 }

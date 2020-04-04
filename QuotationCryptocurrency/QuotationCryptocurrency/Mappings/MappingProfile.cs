@@ -10,7 +10,7 @@ namespace QuotationCryptocurrency.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<QuotationDTO, QuotationModel>()
+            CreateMap<Quotation, QuotationModel>()
                 .ForMember(x => x.Id, s => s.MapFrom(x => x.Id))
                 .ForMember(x => x.CryptoId, s => s.MapFrom(x => x.CryptoId))
                 .ForMember(x => x.Name, s => s.MapFrom(x => x.Name))

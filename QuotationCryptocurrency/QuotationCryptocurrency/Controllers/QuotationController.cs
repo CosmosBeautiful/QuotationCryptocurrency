@@ -20,21 +20,20 @@ namespace QuotationCryptocurrency.Controllers
 
         private readonly IMapper _mapper;
 
-        public QuotationController(IQuotationService quotationService, IMapper mapper)
+        public QuotationController(IQuotationService quotationService, IMapper mapper, IQuotationRepository quotationRepository)
         {
             _quotationService = quotationService;
+            _quotationRepository = quotationRepository;
             _mapper = mapper;
         } 
 
         public IActionResult Index(int pageData = 1, QuotationSortType sortOrder = QuotationSortType.None, string selectedName = "")
         {
+            var quotations = _quotationRepository.Get();
+            var models = _mapper.Map<List<QuotationModel>>(quotations);
 
-            List<QuotationDTO> quotationsDTO = _quotationService.Get();
-            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
-
-
-            QuotationViewModel quotationsViewModel = new QuotationViewModel(pageData, sortOrder, selectedName);
-            IEnumerable<QuotationModel> quotationsSorted =  quotationsViewModel.GetSortedQuotationModel(quotations);
+            var quotationsViewModel = new QuotationViewModel(pageData, sortOrder, selectedName);
+            var quotationsSorted =  quotationsViewModel.GetSortedQuotationModel(models);
 
             TempData.Set("quotationsViewModel", quotationsViewModel);
             return View("Index", quotationsSorted);
@@ -42,43 +41,42 @@ namespace QuotationCryptocurrency.Controllers
 
         public IActionResult Sort(QuotationSortType sortOrder = QuotationSortType.None)
         {
-            List<QuotationDTO> quotationsDTO = _quotationService.Get();
-            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
+            var quotations = _quotationRepository.Get();
+            var quotationModels = _mapper.Map<List<QuotationModel>>(quotations);
 
-            QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
+            var quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
 
-            QuotationSortModel SortModel = new QuotationSortModel(sortOrder);
-            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetSortModel(quotations, SortModel);
+            var sortModel = new QuotationSortModel(sortOrder);
+            var models = quotationsViewModel.GetSortModel(quotationModels, sortModel);
 
             TempData.Set("quotationsViewModel", quotationsViewModel);
-            return View("Index", quotationModels);
+            return View("Index", models);
         }
 
         public IActionResult Filter(QuotationFilters quotationFilters = null)
         {
+            var quotations = _quotationRepository.Get();
+            var quotationModels = _mapper.Map<List<QuotationModel>>(quotations);
 
-            List<QuotationDTO> quotationsDTO = _quotationService.Get();
-            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
+            var quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
 
-            QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
-
-            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetFilterModel(quotations, quotationFilters);
+            var models = quotationsViewModel.GetFilterModel(quotationModels, quotationFilters);
 
             TempData.Set("quotationsViewModel", quotationsViewModel);
-            return View("Index", quotationModels);
+            return View("Index", models);
         }
 
         public IActionResult Page(int pageData = 1)
         {
-            List<QuotationDTO> quotationsDTO = _quotationService.Get();
-            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
+            var quotations = _quotationRepository.Get();
+            var quotationModels = _mapper.Map<List<QuotationModel>>(quotations);
 
-            QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
+            var quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
 
-            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetPage(quotations, pageData);
+            var models = quotationsViewModel.GetPage(quotationModels, pageData);
 
             TempData.Set("quotationsViewModel", quotationsViewModel);
-            return View("Index", quotationModels);
+            return View("Index", models);
         }
 
         public IActionResult Update()
