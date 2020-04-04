@@ -7,6 +7,6 @@ namespace QuotationCryptocurrency.Database
     {
         DbSet<Crypto> Cryptos { get; set; }
         DbSet<Quote> Quotes { get; set; }
-        DbSet<QuotationView> QuotationsView { get; set; }
+        DbSet<Quotation> QuotationsView { get; set; }
     }
 }

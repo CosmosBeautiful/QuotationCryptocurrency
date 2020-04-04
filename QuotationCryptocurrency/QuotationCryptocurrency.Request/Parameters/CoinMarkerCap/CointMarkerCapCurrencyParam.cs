@@ -6,7 +6,7 @@ namespace QuotationCryptocurrency.Request.Parameters
     public class CointMarkerCapCurrencyParam
     {
         [JsonProperty("price")]
-        public double Price { get; set; }
+        public Nullable<double> Price { get; set; }
 
         [JsonProperty("volume_24h")]
         public Nullable<double> Volume24h { get; set; }

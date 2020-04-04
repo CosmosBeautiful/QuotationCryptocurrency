@@ -39,7 +39,7 @@ namespace QuotationCryptocurrency.Database.Tests
             IQuotationRepository repository = new QuotationRepository(_db);
 
             //act
-            List<QuotationView> quotations = repository.Get();
+            List<Quotation> quotations = repository.Get();
 
             //assert
             Assert.AreEqual(true, (quotations.Count > 0), "No database connection");

@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuotationCryptocurrency.Business.DTO;
 using QuotationCryptocurrency.Business.Services;
+using QuotationCryptocurrency.Database.Repositories;
 using QuotationCryptocurrency.FilterModels.Quotation;
 using QuotationCryptocurrency.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
+using QuotationCryptocurrency.Database.Models;
 
 namespace QuotationCryptocurrency.Controllers
 {
@@ -14,6 +16,7 @@ namespace QuotationCryptocurrency.Controllers
     public class QuotationController : Controller
     {
         private readonly IQuotationService _quotationService;
+        private readonly IQuotationRepository _quotationRepository;
 
         private readonly IMapper _mapper;
 

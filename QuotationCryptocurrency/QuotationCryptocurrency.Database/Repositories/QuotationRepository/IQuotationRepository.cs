@@ -5,6 +5,6 @@ namespace QuotationCryptocurrency.Database.Repositories
 {
     public interface IQuotationRepository : IRepository
     {
-        List<QuotationView> Get();
+        List<Quotation> Get();
     }
 }

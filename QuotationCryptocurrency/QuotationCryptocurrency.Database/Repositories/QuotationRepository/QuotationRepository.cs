@@ -13,9 +13,9 @@ namespace QuotationCryptocurrency.Database.Repositories
             _db = db;
         }
 
-        public List<QuotationView> Get()
+        public List<Quotation> Get()
         {
-            List<QuotationView> quotations = _db.QuotationsView.ToList();
+            List<Quotation> quotations = _db.QuotationsView.ToList();
             return quotations;
         }
     }

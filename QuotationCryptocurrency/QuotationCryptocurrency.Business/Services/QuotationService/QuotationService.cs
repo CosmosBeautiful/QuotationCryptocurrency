@@ -35,7 +35,7 @@ namespace QuotationCryptocurrency.Business.Services
 
         public List<QuotationDTO> Get()
         {
-            List<QuotationView> quotations = _quotationRepository.Get();
+            List<Quotation> quotations = _quotationRepository.Get();
             List<QuotationDTO> quotationsDTO = _mapper.Map<List<QuotationDTO>>(quotations);
 
             return quotationsDTO;

@@ -49,9 +49,9 @@ namespace QuotationCryptocurrency.Business.Tests
         public void Get()
         {
             //arrange
-            var quotationsView = new List<QuotationView>()
+            var quotationsView = new List<Quotation>()
             {
-                new QuotationView()
+                new Quotation()
                 {
                     Id = 1,
                     CryptoId = 1,
