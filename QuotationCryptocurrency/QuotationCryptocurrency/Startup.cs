@@ -8,14 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using QuotationCryptocurrency.Business.Services;
 using QuotationCryptocurrency.Data;
 using QuotationCryptocurrency.Database;
 using QuotationCryptocurrency.Database.Repositories;
-using QuotationCryptocurrency.Mappings;
 using QuotationCryptocurrency.Request;
 using QuotationCryptocurrency.Request.Configurations;
 using QuotationCryptocurrency.Request.Parameters;
+using QuotationCryptocurrency.Services;
 
 namespace QuotationCryptocurrency
 {
@@ -55,7 +54,6 @@ namespace QuotationCryptocurrency
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new QuotationCryptocurrency.Mappings.MappingProfile());
-                mc.AddProfile(new QuotationCryptocurrency.Business.Mapper.MappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

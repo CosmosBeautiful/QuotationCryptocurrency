@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using QuotationCryptocurrency.Business.DTO;
-using QuotationCryptocurrency.Business.Services;
 using QuotationCryptocurrency.Database.Repositories;
 using QuotationCryptocurrency.FilterModels.Quotation;
 using QuotationCryptocurrency.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
-using QuotationCryptocurrency.Database.Models;
+using QuotationCryptocurrency.Services;
 
 namespace QuotationCryptocurrency.Controllers
 {

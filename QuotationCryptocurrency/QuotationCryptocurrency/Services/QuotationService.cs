@@ -1,16 +1,20 @@
 ﻿using AutoMapper;
-using QuotationCryptocurrency.Business.DTO;
 using QuotationCryptocurrency.Database.Models;
 using QuotationCryptocurrency.Database.Repositories;
+using QuotationCryptocurrency.Models;
 using QuotationCryptocurrency.Request;
 using QuotationCryptocurrency.Request.Parameters;
 using System.Collections.Generic;
 
-namespace QuotationCryptocurrency.Business.Services
+namespace QuotationCryptocurrency.Services
 {
+    public interface IQuotationService
+    {
+        void Update();
+    }
+
     public class QuotationService : IQuotationService
     {
-        private IQuotationRepository _quotationRepository;
         private ICryptoRepository _cryptoRepository;
         private IQuoteRepository _quoteRepository;
 
@@ -26,7 +30,6 @@ namespace QuotationCryptocurrency.Business.Services
             IMapper mapper
             )
         {
-            _quotationRepository = quotationRepository;
             _cryptoRepository = cryptoRepository;
             _quoteRepository = quoteRepository;
             _request = request;
@@ -35,22 +38,21 @@ namespace QuotationCryptocurrency.Business.Services
 
         public void Update()
         {
-            List<CoinMarkerCapParam> coinMarkerCapParams = _request.Send();
-            List<QuotationDTO> updateQuotationsDTO = _mapper.Map<List<QuotationDTO>>(coinMarkerCapParams);
+            var coinMarkerCapParams = _request.Send();
+            var updateQuotationsDTO = _mapper.Map<List<QuotationModel>>(coinMarkerCapParams);
 
-            List<Crypto> cryptos = _cryptoRepository.Get();
-            List<CryptoDTO> cryptosDTO = _mapper.Map<List<CryptoDTO>>(cryptos);
+            var crypts = _cryptoRepository.Get();
+            var cryptsModels = _mapper.Map<List<CryptoModel>>(crypts);
 
-
-            List<QuoteDTO> newQuotesDTO = new List<QuoteDTO>();
-            foreach (QuotationDTO item in updateQuotationsDTO)
+            var newQuotesDTO = new List<QuoteModel>();
+            foreach (QuotationModel item in updateQuotationsDTO)
             {
-                if (IsСryptNotExist(cryptosDTO, item))
+                if (IsCryptNotExist(cryptsModels, item))
                 {
                     CreateCrypto(item);
                 }
 
-                QuoteDTO newQuoteDTO = new QuoteDTO(item);
+                QuoteModel newQuoteDTO = new QuoteModel(item);
                 newQuotesDTO.Add(newQuoteDTO);
             }
 
@@ -58,14 +60,14 @@ namespace QuotationCryptocurrency.Business.Services
             _quoteRepository.AddRange(newQuotes);
         }
 
-        private bool IsСryptNotExist(List<CryptoDTO> cryptos, QuotationDTO item)
+        private static bool IsCryptNotExist(List<CryptoModel> crypts, QuotationModel item)
         {
-            return (cryptos.Find(x => x.Id == item.Id) == null);
+            return (crypts.Find(x => x.Id == item.Id) == null);
         }
 
-        private void CreateCrypto(QuotationDTO quotation)
+        private void CreateCrypto(QuotationModel quotation)
         {
-            CryptoDTO cryptoDTO = new CryptoDTO(quotation);
+            CryptoModel cryptoDTO = new CryptoModel(quotation);
             Crypto crypto = _mapper.Map<Crypto>(cryptoDTO);
 
             _cryptoRepository.Add(crypto);
