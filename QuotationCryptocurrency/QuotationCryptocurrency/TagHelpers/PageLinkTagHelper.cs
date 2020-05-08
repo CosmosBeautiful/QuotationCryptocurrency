@@ -14,34 +14,35 @@ namespace QuotationCryptocurrency.TagHelpers
         public ViewContext ViewContext { get; set; }
 
         public string PageAction { get; set; }
-        public PageNavigation PageNavigation { get; set; }
 
-        private IUrlHelperFactory urlHelperFactory;
+        public QuotationViewModel Model { get; set; }
+
+        public IUrlHelperFactory UrlHelperFactory;
 
         public PageLinkTagHelper(IUrlHelperFactory helperFactory)
         {
-            urlHelperFactory = helperFactory;
+            UrlHelperFactory = helperFactory;
         }
     
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
+            IUrlHelper urlHelper = UrlHelperFactory.GetUrlHelper(ViewContext);
             output.TagName = "nav";
 
             TagBuilder tag = new TagBuilder("ul");
             tag.AddCssClass("pagination");
 
-            TagBuilder currentItem = CreatePageItem(PageNavigation.PageNumber, urlHelper);
-            if (PageNavigation.HasPreviousPage)
+            TagBuilder currentItem = CreatePageItem(Model.PaginationModel.PageNumber, urlHelper);
+            if (Model.PaginationModel.HasPreviousPage)
             {
-                TagBuilder prevItem = CreatePageItem(PageNavigation.PageNumber - 1, urlHelper);
+                TagBuilder prevItem = CreatePageItem(Model.PaginationModel.PageNumber - 1, urlHelper);
                 tag.InnerHtml.AppendHtml(prevItem);
             }
 
             tag.InnerHtml.AppendHtml(currentItem);
-            if (PageNavigation.HasNextPage)
+            if (Model.PaginationModel.HasNextPage)
             {
-                TagBuilder nextItem = CreatePageItem(PageNavigation.PageNumber + 1, urlHelper);
+                TagBuilder nextItem = CreatePageItem(Model.PaginationModel.PageNumber + 1, urlHelper);
                 tag.InnerHtml.AppendHtml(nextItem);
             }
             output.Content.AppendHtml(tag);
@@ -55,13 +56,13 @@ namespace QuotationCryptocurrency.TagHelpers
             TagBuilder link = new TagBuilder("a");
             link.AddCssClass("page-link");
 
-            if (pageNumber == this.PageNavigation.PageNumber)
+            if (pageNumber == Model.PaginationModel.PageNumber)
             {
                 item.AddCssClass("active");
             }
             else
             {
-                link.Attributes["href"] = urlHelper.Action(PageAction, new { pageData = pageNumber });
+                link.Attributes["href"] = urlHelper.Action(PageAction, new { pageNumber, sortOrder = Model.SortModel, name = Model.FilterData.Name, symbol = Model.FilterData.Symbol });
             }
             link.InnerHtml.Append(pageNumber.ToString());
             item.InnerHtml.AppendHtml(link);

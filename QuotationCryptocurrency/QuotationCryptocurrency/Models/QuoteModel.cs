@@ -20,8 +20,8 @@ namespace QuotationCryptocurrency.Models
         {
             CryptoId = quotation.Id;
             Price = quotation.Price;
-            PercentChange1h = quotation.PercentChange1h;
-            PercentChange24h = quotation.PercentChange24h;
+            PercentChange1h = quotation.PercentChange1H;
+            PercentChange24h = quotation.PercentChange24H;
             MarketCap = quotation.MarketCap;
             LastUpdated = quotation.LastUpdated;
         }

@@ -1,4 +1,4 @@
-﻿namespace QuotationCryptocurrency.FilterModels.Quotation
+﻿namespace QuotationCryptocurrency.Database.Models.Sort
 {
     public enum QuotationSortType
     {
@@ -11,10 +11,10 @@
         SymbolDesc,
         PriceAsc,
         PriceDesc,
-        PercentChange1hAsc,
-        PercentChange1hDesc,
-        PercentChange24hAsc,
-        PercentChange24hDesc,
+        PercentChange1HAsc,
+        PercentChange1HDesc,
+        PercentChange24HAsc,
+        PercentChange24HDesc,
         MarketCapAsc,
         MarketCapDesc,
         LastUpdatedAsc,

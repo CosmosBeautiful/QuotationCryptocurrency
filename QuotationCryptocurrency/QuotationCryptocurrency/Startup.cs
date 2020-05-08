@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using QuotationCryptocurrency.Data;
 using QuotationCryptocurrency.Database;
+using QuotationCryptocurrency.Database.Contexts;
 using QuotationCryptocurrency.Database.Repositories;
 using QuotationCryptocurrency.Request;
 using QuotationCryptocurrency.Request.Configurations;

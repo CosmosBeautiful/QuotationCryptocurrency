@@ -1,8 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuotationCryptocurrency.Database.Models;
 
-namespace QuotationCryptocurrency.Database
+namespace QuotationCryptocurrency.Database.Contexts
 {
+    public interface IQuotationContext
+    {
+        DbSet<Crypto> Cryptos { get; set; }
+        DbSet<Quote> Quotes { get; set; }
+        DbSet<Quotation> QuotationsView { get; set; }
+    }
+
     public class QuotationContext : DbContext, IQuotationContext
     {
         public DbSet<Crypto> Cryptos { get; set; }

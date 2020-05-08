@@ -6,10 +6,9 @@
     @*<li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
     </li>*@
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Quotation" asp-action="Index">Quotation</a>
-        </li>
-    }
+    @*@if (SignInManager.IsSignedIn(User))
+    {*@
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Quotation" asp-action="Index">Quotation</a>
+    </li>
 </ul>
