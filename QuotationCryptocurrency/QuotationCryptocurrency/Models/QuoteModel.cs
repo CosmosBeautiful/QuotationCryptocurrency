@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace QuotationCryptocurrency.Business.DTO
+namespace QuotationCryptocurrency.Models
 {
-    public class QuoteDTO
+    public class QuoteModel
     {
         public int Id { get; set; }
         public int CryptoId { get; set; }
@@ -12,16 +12,16 @@ namespace QuotationCryptocurrency.Business.DTO
         public double? MarketCap { get; set; }
         public DateTime LastUpdated { get; set; }
 
-        public QuoteDTO()
+        public QuoteModel()
         {
         }
 
-        public QuoteDTO(QuotationDTO quotation)
+        public QuoteModel(QuotationModel quotation)
         {
             CryptoId = quotation.Id;
             Price = quotation.Price;
-            PercentChange1h = quotation.PercentChange1h;
-            PercentChange24h = quotation.PercentChange24h;
+            PercentChange1h = quotation.PercentChange1H;
+            PercentChange24h = quotation.PercentChange24H;
             MarketCap = quotation.MarketCap;
             LastUpdated = quotation.LastUpdated;
         }

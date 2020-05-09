@@ -30,7 +30,8 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\QuotationCryptocurrency.Business\QuotationCryptocurrency.Business.csproj" />
+    <ProjectReference Include="..\QuotationCryptocurrency.Database\QuotationCryptocurrency.Database.csproj" />
+    <ProjectReference Include="..\QuotationCryptocurrency.Request\QuotationCryptocurrency.Request.csproj" />
   </ItemGroup>
 
 </Project>

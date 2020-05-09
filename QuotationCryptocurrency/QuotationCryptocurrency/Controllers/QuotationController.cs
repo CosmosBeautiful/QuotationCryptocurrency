@@ -1,93 +1,51 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using QuotationCryptocurrency.Business.DTO;
-using QuotationCryptocurrency.Business.Services;
-using QuotationCryptocurrency.FilterModels.Quotation;
+using QuotationCryptocurrency.Database.Models.Filter;
+using QuotationCryptocurrency.Database.Models.Sort;
+using QuotationCryptocurrency.Database.Repositories;
 using QuotationCryptocurrency.Models;
+using QuotationCryptocurrency.Services;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Linq;
+using QuotationCryptocurrency.Database.Models.Pagination;
 
 namespace QuotationCryptocurrency.Controllers
 {
-    [Authorize]
     public class QuotationController : Controller
     {
-        private readonly IQuotationService _quotationService;
+        private readonly IMapper Mapper;
 
-        private readonly IMapper _mapper;
+        private readonly IQuotationService QuotationService;
 
-        public QuotationController(IQuotationService quotationService, IMapper mapper)
+        private readonly IQuotationRepository QuotationRepository;
+
+        public QuotationController(IQuotationService quotationService, IMapper mapper, IQuotationRepository quotationRepository)
         {
-            _quotationService = quotationService;
-            _mapper = mapper;
+            QuotationService = quotationService;
+            QuotationRepository = quotationRepository;
+            Mapper = mapper;
         } 
 
-        public IActionResult Index(int pageData = 1, QuotationSortType sortOrder = QuotationSortType.None, string selectedName = "")
+        public IActionResult Index(int pageNumber = 1, QuotationSortType sortOrder = QuotationSortType.None, QuotationFilterData filterData = null)
         {
+            var paginationData = new PaginationData(pageNumber);
 
-            List<QuotationDTO> quotationsDTO = _quotationService.Get();
-            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
+            var quotations = QuotationRepository.Get(sortOrder, filterData, paginationData).ToList();
+            var quotationModels = Mapper.Map<List<QuotationModel>>(quotations);
 
+            var quotationCount = QuotationRepository.GetTotalCount(sortOrder, filterData);
+            var paginationModel = new PaginationModel(paginationData, quotationCount);
 
-            QuotationViewModel quotationsViewModel = new QuotationViewModel(pageData, sortOrder, selectedName);
-            IEnumerable<QuotationModel> quotationsSorted =  quotationsViewModel.GetSortedQuotationModel(quotations);
+            var model = new QuotationViewModel(quotationModels, sortOrder, filterData, paginationModel);
 
-            TempData.Set("quotationsViewModel", quotationsViewModel);
-            return View("Index", quotationsSorted);
-        }
-
-        public IActionResult Sort(QuotationSortType sortOrder = QuotationSortType.None)
-        {
-            List<QuotationDTO> quotationsDTO = _quotationService.Get();
-            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
-
-            QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
-
-            QuotationSortModel SortModel = new QuotationSortModel(sortOrder);
-            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetSortModel(quotations, SortModel);
-
-            TempData.Set("quotationsViewModel", quotationsViewModel);
-            return View("Index", quotationModels);
-        }
-
-        public IActionResult Filter(QuotationFilters quotationFilters = null)
-        {
-
-            List<QuotationDTO> quotationsDTO = _quotationService.Get();
-            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
-
-            QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
-
-            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetFilterModel(quotations, quotationFilters);
-
-            TempData.Set("quotationsViewModel", quotationsViewModel);
-            return View("Index", quotationModels);
-        }
-
-        public IActionResult Page(int pageData = 1)
-        {
-            List<QuotationDTO> quotationsDTO = _quotationService.Get();
-            List<QuotationModel> quotations = _mapper.Map<List<QuotationModel>>(quotationsDTO);
-
-            QuotationViewModel quotationsViewModel = TempData.Get<QuotationViewModel>("quotationsViewModel");
-
-            IEnumerable<QuotationModel> quotationModels = quotationsViewModel.GetPage(quotations, pageData);
-
-            TempData.Set("quotationsViewModel", quotationsViewModel);
-            return View("Index", quotationModels);
+            return View("Index", model);
         }
 
         public IActionResult Update()
         {
-            _quotationService.Update();
+            QuotationService.Update();
             return RedirectPermanent("Index");
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

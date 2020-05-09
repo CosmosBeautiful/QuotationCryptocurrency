@@ -1,17 +1,18 @@
-﻿@using QuotationCryptocurrency.FilterModels.Quotation
+﻿@model QuotationViewModel
 
-@model QuotationFilters
-
-@using (Html.BeginForm("Filter", "Quotation"))
+@using (Html.BeginForm( "Index", "Quotation", FormMethod.Get))
 {
+    <input type="hidden" name ="pageNumber" value="@Model.PaginationModel.PageNumber"/>
+    <input type="hidden" name ="sortOrder" value="@Model.SortModel"/>
+
     <div class="form-row">
         <div class="col">
             <label class="control-label">Name:&nbsp;</label>
-            @Html.TextBox("SelectedName", Model.SelectedName, htmlAttributes: new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.FilterData.Name, new { @class = "form-control" })
         </div>
         <div class="col">
             <label class="control-label">Symbol:&nbsp;</label>
-            @Html.TextBox("SelectedSymbol", Model.SelectedSymbol, htmlAttributes: new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.FilterData.Symbol, new { @class = "form-control" })
         </div>
         <input type="submit" value="Фильтр" class="btn btn-primary" />
     </div>

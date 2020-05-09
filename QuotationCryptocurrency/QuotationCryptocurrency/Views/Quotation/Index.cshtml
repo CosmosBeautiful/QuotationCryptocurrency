@@ -1,99 +1,98 @@
-﻿@using QuotationCryptocurrency.Models
-@using QuotationCryptocurrency.FilterModels.Quotation
+﻿@using SortType = QuotationCryptocurrency.Database.Models.Sort.QuotationSortType;
 
 @addTagHelper "*, QuotationCryptocurrency"
+@model QuotationViewModel
 
-@model IEnumerable<QuotationModel>
 @{
-    ViewBag.Title = "Index";
-    QuotationViewModel ViewModel = TempData.Peek<QuotationViewModel>("quotationsViewModel");
+    var sortName = Model.SortModel == SortType.NameAsc ? SortType.NameDesc : SortType.NameAsc;
+    var sortSymbol = Model.SortModel == SortType.SymbolAsc ? SortType.SymbolDesc : SortType.SymbolAsc;
+    var sortPrice = Model.SortModel == SortType.PriceAsc ? SortType.PriceDesc : SortType.PriceAsc;
+    var sortPercentChange1H = Model.SortModel == SortType.PercentChange1HAsc ? SortType.PercentChange1HDesc : SortType.PercentChange1HAsc;
+    var sortPercentChange24H = Model.SortModel == SortType.PercentChange24HAsc ? SortType.PercentChange24HDesc : SortType.PercentChange24HAsc;
+    var sortMarketCap = Model.SortModel == SortType.MarketCapAsc ? SortType.MarketCapDesc : SortType.MarketCapAsc;
+    var sortLastUpdated = Model.SortModel == SortType.LastUpdatedAsc ? SortType.LastUpdatedDesc : SortType.LastUpdatedAsc;
 }
-    <div>
-        <h2>Quotation Cryptocurrency</h2>
-        <hr />
 
-        @await Html.PartialAsync("_Filter", ViewModel.FilterModel)
-        <br />
-        <div class="text-right">
-            <a asp-action="Update" asp-route-update="true" class="link">Обновить котировки</a>
-        </div>
-        <br />
+<div>
+    <h2>Quotation Cryptocurrency</h2>
+    <hr />
 
-        <table class="table table-striped">
-            <tr>
-                <th>
-                    <a asp-action="Sort"
-                       asp-route-sortOrder="@(ViewModel.SortModel.NameSort)">
-                        Name
-                    </a>
-                </th>
-                <th>
-                    <a asp-action="Sort"
-                       asp-route-sortOrder="@(ViewModel.SortModel.SymbolSort)">
-                        Symbol
-                    </a>
-                </th>
-                <th>
-                    <a asp-action="Sort"
-                       asp-route-sortOrder="@(ViewModel.SortModel.PriceSort)">
-                        Price
-                    </a>
-                </th>
-                <th>
-                    <a asp-action="Sort"
-                       asp-route-sortOrder="@(ViewModel.SortModel.PercentChange1hSort)">
-                        PercentChange1h
-                    </a>
-                </th>
-                <th>
-                    <a asp-action="Sort"
-                       asp-route-sortOrder="@(ViewModel.SortModel.PercentChange24hSort)">
-                        PercentChange24hSort
-                    </a>
-                </th>
-                <th>
-                    <a asp-action="Sort"
-                       asp-route-sortOrder="@(ViewModel.SortModel.MarketCapSort)">
-                        MarketCap
-                    </a>
-                </th>
-                <th>
-                    <a asp-action="Sort"
-                       asp-route-sortOrder="@(ViewModel.SortModel.LastUpdatedSort)">
-                        LastUpdated
-                    </a>
-                </th>
-            </tr>
-
-            @foreach (QuotationModel item in Model)
-            {
-                <tr>
-                    <td>
-                        <img src="https://s2.coinmarketcap.com/static/img/coins/32x32/@{@item.Id}.png" class="logo-sprite" alt="Bitcoin" height="16" width="16">
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Symbol)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PercentChange1h)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PercentChange24h)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MarketCap)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastUpdated)
-                    </td>
-                </tr>
-            }
-        </table>
-
-        @await Html.PartialAsync("_Navigation", ViewModel.PageNavigation)
-
+    @await Html.PartialAsync("_Filter", Model)
+    <br />
+    <div class="text-center">
+        <a class="page-link" href="@Url.Action("Update", "Quotation")">Обновить котировки</a>
     </div>
+    <br />
+
+    <table class="table table-striped">
+        <tr>
+            <th>
+               
+                <a href="@Url.Action("Index", "Quotation", new { pageNumber = Model.PaginationModel.PageNumber, sortOrder = sortName, name = Model.FilterData.Name, symbol = Model.FilterData.Symbol})">
+                    Name
+                </a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "Quotation", new { pageNumber = Model.PaginationModel.PageNumber, sortOrder = sortSymbol, name = Model.FilterData.Name, symbol = Model.FilterData.Symbol})">
+                    Symbol
+                </a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "Quotation", new { pageNumber = Model.PaginationModel.PageNumber, sortOrder = sortPrice, name = Model.FilterData.Name, symbol = Model.FilterData.Symbol})">
+                    Price
+                </a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "Quotation", new { pageNumber = Model.PaginationModel.PageNumber, sortOrder = sortPercentChange1H, name = Model.FilterData.Name, symbol = Model.FilterData.Symbol})">
+                    PercentChange1h
+                </a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "Quotation", new { pageNumber = Model.PaginationModel.PageNumber, sortOrder = sortPercentChange24H, name = Model.FilterData.Name, symbol = Model.FilterData.Symbol})">
+                    PercentChange24h
+                </a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "Quotation", new { pageNumber = Model.PaginationModel.PageNumber, sortOrder = sortMarketCap, name = Model.FilterData.Name, symbol = Model.FilterData.Symbol})">
+                    MarketCap
+                </a>
+            </th>
+            <th>
+                <a href="@Url.Action("Index", "Quotation", new { pageNumber = Model.PaginationModel.PageNumber, sortOrder = sortLastUpdated, name = Model.FilterData.Name, symbol = Model.FilterData.Symbol})">
+                    LastUpdated
+                </a>
+            </th>
+        </tr>
+
+        @foreach (QuotationModel item in Model.Quotations)
+        {
+            <tr>
+                <td>
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/32x32/@{@item.Id}.png" class="logo-sprite" alt="" height="16" width="16">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Symbol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PercentChange1H)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PercentChange24H)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MarketCap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdated)
+                </td>
+            </tr>
+        }
+    </table>
+
+    @await Html.PartialAsync("_Pagination", Model)
+
+</div>

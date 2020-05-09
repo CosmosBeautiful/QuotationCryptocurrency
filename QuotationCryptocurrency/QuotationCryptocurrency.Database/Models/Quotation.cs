@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace QuotationCryptocurrency.Database.Models
 {
     [Table("quotation_view")]
-    public class QuotationView
+    public class Quotation
     {
         [Column("id")]
         public int Id { get; set; }

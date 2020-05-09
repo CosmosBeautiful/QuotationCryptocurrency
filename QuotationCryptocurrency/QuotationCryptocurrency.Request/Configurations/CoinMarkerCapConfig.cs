@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace QuotationCryptocurrency.Request.Configurations
+﻿namespace QuotationCryptocurrency.Request.Configurations
 {
     public class CoinMarkerCapConfig
     {

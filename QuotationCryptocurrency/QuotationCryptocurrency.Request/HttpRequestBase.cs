@@ -7,11 +7,12 @@ namespace QuotationCryptocurrency.Request
     public abstract class HttpRequestBase<TResult> : IRequest<TResult> where TResult : IParam
     {
         protected abstract HttpClient GetHttpClient();
+
         protected abstract string GetUrl();
 
         protected abstract List<TResult> ParserResponse(string responseBody);
 
-        public virtual List<TResult> Send()
+        public virtual List<TResult> SendAndGetResult()
         {
             using (var client = GetHttpClient())
             {

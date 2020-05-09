@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace QuotationCryptocurrency.Business.DTO
+﻿namespace QuotationCryptocurrency.Models
 {
-    public class CryptoDTO
+    public class CryptoModel
     {
         public int Id { get; set; }
 
@@ -10,11 +8,11 @@ namespace QuotationCryptocurrency.Business.DTO
 
         public string Symbol { get; set; }
 
-        public CryptoDTO()
+        public CryptoModel()
         {
         }
 
-        public CryptoDTO(QuotationDTO quotation)
+        public CryptoModel(QuotationModel quotation)
         {
             Id = quotation.CryptoId;
             Name = quotation.Name;

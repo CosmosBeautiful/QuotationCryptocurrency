@@ -1,0 +1,43 @@
+﻿@addTagHelper "*, QuotationCryptocurrency"
+
+@model QuotationViewModel
+
+<div class="container">
+    <div class="d-flex flex-row">
+        @if (Model.PaginationModel.HasPreviousPage)
+        {
+            <div class="page-item">
+                @{ var pageNumberPrev = Model.PaginationModel.PageNumber - 1; }
+                <a class="page-link" href="@Url.Action("Index","Quotation", new { pageNumber = pageNumberPrev, sortOrder = Model.SortModel, name = Model.FilterData.Name, symbol = Model.FilterData.Symbol })">
+                    Back
+                </a>
+            </div>
+        }
+      
+        <page-link page-action="Index" model="Model" ></page-link>
+
+        @if (Model.PaginationModel.HasNextPage)
+        {
+
+            <div class="page-item">
+                @{ var pageNumberNext = Model.PaginationModel.PageNumber + 1; }
+                <a class="page-link" href="@Url.Action("Index","Quotation", new { pageNumber = pageNumberNext, sortOrder = Model.SortModel, name = Model.FilterData.Name, symbol = Model.FilterData.Symbol })">
+                    Next
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+
+@*<script>
+    function sendPostRequest(urlAction, data) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', urlAction);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.responseType = 'json';
+   
+
+        xhr.send(data);
+    };
+</script>*@

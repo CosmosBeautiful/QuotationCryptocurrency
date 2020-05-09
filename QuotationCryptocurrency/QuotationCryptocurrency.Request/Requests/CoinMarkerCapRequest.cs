@@ -1,17 +1,17 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using QuotationCryptocurrency.Request.Configurations;
-using QuotationCryptocurrency.Request.Parameters;
+using QuotationCryptocurrency.Request.Parameters.CoinMarkerCap;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
 
-namespace QuotationCryptocurrency.Request
+namespace QuotationCryptocurrency.Request.Requests
 {
     public class CoinMarkerCapRequest : HttpRequestBase<CoinMarkerCapParam>
     {
-        private CoinMarkerCapConfig CoinMarkerCapConfig { get; set; }
+        private CoinMarkerCapConfig CoinMarkerCapConfig { get; }
 
         public CoinMarkerCapRequest(IOptions<CoinMarkerCapConfig> CoinMarkerCapOptions)
         {
@@ -46,7 +46,7 @@ namespace QuotationCryptocurrency.Request
 
         protected override List<CoinMarkerCapParam> ParserResponse(string responseBody)
         {
-            CoinMarkerCapResponseParam responseObject = JsonConvert.DeserializeObject<CoinMarkerCapResponseParam>(responseBody);
+            var responseObject = JsonConvert.DeserializeObject<CoinMarkerCapResponseParam>(responseBody);
             List<CoinMarkerCapParam> models = responseObject.Data.ToList();
             return models;
         }
