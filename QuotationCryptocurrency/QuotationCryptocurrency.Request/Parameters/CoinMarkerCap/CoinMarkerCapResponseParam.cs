@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace QuotationCryptocurrency.Request.Parameters
+namespace QuotationCryptocurrency.Request.Parameters.CoinMarkerCap
 {
     public class CoinMarkerCapResponseParam
     {

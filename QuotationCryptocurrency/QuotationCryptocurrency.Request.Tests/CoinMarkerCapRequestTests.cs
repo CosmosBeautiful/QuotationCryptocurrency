@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Collections.Generic;
+using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using QuotationCryptocurrency.Request.Configurations;
-using QuotationCryptocurrency.Request.Parameters;
-using System.Collections.Generic;
+using QuotationCryptocurrency.Request.Parameters.CoinMarkerCap;
+using QuotationCryptocurrency.Request.Requests;
 
-namespace QuotationCryptocurrency.Request.Tests.Requests
+namespace QuotationCryptocurrency.Request.Tests
 {
     [TestClass]
     public class CoinMarkerCapRequestTests
@@ -35,7 +36,7 @@ namespace QuotationCryptocurrency.Request.Tests.Requests
             IRequest<CoinMarkerCapParam> request = new CoinMarkerCapRequest(mockConfig.Object);
 
             //act
-            List<CoinMarkerCapParam> coinMarkerCapParams = request.Send();
+            List<CoinMarkerCapParam> coinMarkerCapParams = request.SendAndGetResult();
 
             //assert
             Assert.AreEqual(true, (coinMarkerCapParams.Count > 0), "No response from api");

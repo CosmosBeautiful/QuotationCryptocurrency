@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace QuotationCryptocurrency.Request.Parameters
+namespace QuotationCryptocurrency.Request.Parameters.CoinMarkerCap
 {
     public class CoinMarkerCapStatusParam
     {

@@ -2,6 +2,7 @@
 using QuotationCryptocurrency.Database.Models;
 using QuotationCryptocurrency.Models;
 using QuotationCryptocurrency.Request.Parameters;
+using QuotationCryptocurrency.Request.Parameters.CoinMarkerCap;
 
 namespace QuotationCryptocurrency.Mappings
 {

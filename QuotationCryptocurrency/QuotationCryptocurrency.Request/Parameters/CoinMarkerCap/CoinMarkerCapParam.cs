@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace QuotationCryptocurrency.Request.Parameters
+namespace QuotationCryptocurrency.Request.Parameters.CoinMarkerCap
 {
     public class CoinMarkerCapParam : IParam
     {
@@ -24,7 +24,7 @@ namespace QuotationCryptocurrency.Request.Parameters
         public DateTime DateAdded { get; set; }
 
         [JsonProperty("total_supply")]
-        public Nullable<double> TotalSupply { get; set; }
+        public double? TotalSupply { get; set; }
 
         [JsonProperty("platform")]
         public object Platform { get; set; }

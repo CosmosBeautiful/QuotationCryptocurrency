@@ -15,6 +15,8 @@ using QuotationCryptocurrency.Database.Repositories;
 using QuotationCryptocurrency.Request;
 using QuotationCryptocurrency.Request.Configurations;
 using QuotationCryptocurrency.Request.Parameters;
+using QuotationCryptocurrency.Request.Parameters.CoinMarkerCap;
+using QuotationCryptocurrency.Request.Requests;
 using QuotationCryptocurrency.Services;
 
 namespace QuotationCryptocurrency

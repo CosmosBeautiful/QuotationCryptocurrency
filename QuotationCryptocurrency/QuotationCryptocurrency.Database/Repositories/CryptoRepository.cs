@@ -14,23 +14,23 @@ namespace QuotationCryptocurrency.Database.Repositories
 
     public class CryptoRepository : ICryptoRepository
     {
-        private readonly QuotationContext _db;
+        private readonly QuotationContext DB;
 
         public CryptoRepository(QuotationContext db)
         {
-            _db = db;
+            DB = db;
         }
 
         public List<Crypto> Get()
         {
-            List<Crypto> cryptos = _db.Cryptos.ToList();
+            List<Crypto> cryptos = DB.Cryptos.ToList();
             return cryptos;
         }
 
         public void Add(Crypto crypto)
         {
-            _db.Cryptos.Add(crypto);
-            _db.SaveChanges();
+            DB.Cryptos.Add(crypto);
+            DB.SaveChanges();
         }
     }
 }
