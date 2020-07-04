@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\QuotationCryptocurrency\appsettings.json" Link="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.5" />
@@ -28,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuotationCryptocurrency.Database\QuotationCryptocurrency.Database.csproj" />
-    <ProjectReference Include="..\Tests\QuotationCryptocurrency.Common.Tests\QuotationCryptocurrency.Common.Tests.csproj" />
+    <ProjectReference Include="..\..\QuotationCryptocurrency.Database\QuotationCryptocurrency.Database.csproj" />
+    <ProjectReference Include="..\QuotationCryptocurrency.Common.Tests\QuotationCryptocurrency.Common.Tests.csproj" />
   </ItemGroup>
 
 </Project>
