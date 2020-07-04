@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,15 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\QuotationCryptocurrency\appsettings.json" Link="appsettings.json">
+    <Content Include="..\..\QuotationCryptocurrency\appsettings.json" Link="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
@@ -24,12 +21,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\QuotationCryptocurrency.Database\QuotationCryptocurrency.Database.csproj" />
-    <ProjectReference Include="..\Tests\QuotationCryptocurrency.Common.Tests\QuotationCryptocurrency.Common.Tests.csproj" />
-  </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

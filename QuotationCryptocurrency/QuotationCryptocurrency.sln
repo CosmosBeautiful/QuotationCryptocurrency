@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotationCryptocurrency.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuotationCryptocurrency.Database.Tests", "QuotationCryptocurrency.Database.Tests\QuotationCryptocurrency.Database.Tests.csproj", "{6826CACC-4723-4C05-8431-7C9E73E09324}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuotationCryptocurrency.Common.Tests", "Tests\QuotationCryptocurrency.Common.Tests\QuotationCryptocurrency.Common.Tests.csproj", "{805482E7-44C0-4734-939C-47290B680299}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{6826CACC-4723-4C05-8431-7C9E73E09324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6826CACC-4723-4C05-8431-7C9E73E09324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6826CACC-4723-4C05-8431-7C9E73E09324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805482E7-44C0-4734-939C-47290B680299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805482E7-44C0-4734-939C-47290B680299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805482E7-44C0-4734-939C-47290B680299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805482E7-44C0-4734-939C-47290B680299}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 		{99276E1D-CC8D-4C4D-A3D5-48208B70FCAB} = {0F6154A4-C8E0-4956-B152-9F28AA30490F}
 		{8E3AA7A7-6AFA-4FC0-9159-474C67CBFE72} = {DC718190-0C76-4C5A-887A-CB1761FC30EB}
 		{6826CACC-4723-4C05-8431-7C9E73E09324} = {0F6154A4-C8E0-4956-B152-9F28AA30490F}
+		{805482E7-44C0-4734-939C-47290B680299} = {0F6154A4-C8E0-4956-B152-9F28AA30490F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11470E88-F256-4C8F-AA94-7E44060F6F21}
