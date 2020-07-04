@@ -19,9 +19,9 @@ namespace QuotationCryptocurrency.Database.Repositories
 
     public class QuotationRepository : IQuotationRepository
     {
-        private readonly QuotationContext DB;
+        private readonly IQuotationContext DB;
 
-        public QuotationRepository(QuotationContext db)
+        public QuotationRepository(IQuotationContext db)
         {
             DB = db;
         }
