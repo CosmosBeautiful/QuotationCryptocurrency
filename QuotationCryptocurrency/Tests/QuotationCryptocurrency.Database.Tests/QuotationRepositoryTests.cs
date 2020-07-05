@@ -12,7 +12,7 @@ namespace QuotationCryptocurrency.Database.Tests
     [TestClass]
     public class QuotationRepositoryTests
     {
-        private static IQuotationContext DB { get; set; }
+        private static QuotationContext DB { get; set; }
 
         [AssemblyInitialize]
         public static void InitializeTests(TestContext testContext)

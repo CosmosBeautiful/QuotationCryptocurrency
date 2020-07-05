@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using QuotationCryptocurrency.Database.Contexts;
+﻿using QuotationCryptocurrency.Database.Contexts;
 using QuotationCryptocurrency.Database.Models;
+using System.Linq;
 
 namespace QuotationCryptocurrency.Database.Repositories
 {
-    public interface ICryptoRepository
+    public interface ICryptoRepository : IRepository<CryptoData>
     {
-        List<CryptoData> Get();
-
-        void Add(CryptoData cryptoData);
     }
 
     public class CryptoRepository : ICryptoRepository
@@ -21,15 +17,36 @@ namespace QuotationCryptocurrency.Database.Repositories
             DB = db;
         }
 
-        public List<CryptoData> Get()
+        public IQueryable<CryptoData> Get()
         {
-            List<CryptoData> cryptos = DB.Cryptos.ToList();
+            var cryptos = DB.Cryptos;
             return cryptos;
         }
 
-        public void Add(CryptoData cryptoData)
+        public CryptoData Find(int? id)
         {
-            DB.Cryptos.Add(cryptoData);
+            var crypto = this.Get()?.Where(x => x.Id == id)
+                .FirstOrDefault();
+            return crypto;
+        }
+
+        public CryptoData Create(CryptoData crypto)
+        {
+            var newCrypto = DB.Cryptos.Add(crypto);
+            DB.SaveChanges();
+
+            return newCrypto.Entity;
+        }
+
+        public void Update(CryptoData crypto)
+        {
+            DB.Cryptos.Update(crypto);
+            DB.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            DB.Cryptos.Remove(new CryptoData { Id = id });
             DB.SaveChanges();
         }
     }

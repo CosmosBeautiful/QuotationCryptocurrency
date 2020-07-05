@@ -57,7 +57,7 @@ namespace QuotationCryptocurrency.Services
             }
 
             List<QuoteData> newQuotes = Mapper.Map<List<QuoteData>>(newQuoteModels);
-            QuoteRepository.AddRange(newQuotes);
+            QuoteRepository.SaveRange(newQuotes);
         }
 
         private static bool IsCryptNotExist(List<CryptoModel> crypts, QuotationModel item)
@@ -70,7 +70,7 @@ namespace QuotationCryptocurrency.Services
             CryptoModel cryptoDTO = new CryptoModel(quotation);
             CryptoData cryptoData = Mapper.Map<CryptoData>(cryptoDTO);
 
-            CryptoRepository.Add(cryptoData);
+            CryptoRepository.Create(cryptoData);
         }
     }
 }

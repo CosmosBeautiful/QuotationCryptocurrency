@@ -45,7 +45,7 @@ namespace QuotationCryptocurrency
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<QuotationContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("QuotationConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -66,6 +66,7 @@ namespace QuotationCryptocurrency
             services.AddTransient<IQuotationRepository, QuotationRepository>();
             services.AddTransient<ICryptoRepository, CryptoRepository>();
             services.AddTransient<IQuoteRepository, QuoteRepository>();
+
 
             services.AddTransient<IQuotationService, QuotationService>();
 

@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using QuotationCryptocurrency.Database.Contexts;
+﻿using QuotationCryptocurrency.Database.Contexts;
 using QuotationCryptocurrency.Database.Models;
+using System.Collections.Generic;
 
 namespace QuotationCryptocurrency.Database.Repositories
 {
-    public interface IQuoteRepository
+    public interface IQuoteRepository : ICommand<QuoteData>
     {
-        void Add(QuoteData quoteData);
-
-        void AddRange(IEnumerable<QuoteData> quotes);
+        void SaveRange(IEnumerable<QuoteData> quotes);
     }
 
     public class QuoteRepository : IQuoteRepository
@@ -20,15 +18,29 @@ namespace QuotationCryptocurrency.Database.Repositories
             DB = db;
         }
 
-        public void Add(QuoteData quoteData)
+        public QuoteData Create(QuoteData quote)
         {
-            DB.Quotes.Add(quoteData);
+            var newQuote = DB.Quotes.Add(quote);
+            DB.SaveChanges();
+
+            return newQuote.Entity;
+        }
+
+        public void SaveRange(IEnumerable<QuoteData> quotes)
+        {
+            DB.Quotes.AddRange(quotes);
             DB.SaveChanges();
         }
 
-        public void AddRange(IEnumerable<QuoteData> quotes)
+        public void Update(QuoteData quote)
         {
-            DB.Quotes.AddRange(quotes);
+            DB.Quotes.Update(quote);
+            DB.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            DB.Quotes.Remove(new QuoteData { Id = id });
             DB.SaveChanges();
         }
     }

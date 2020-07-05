@@ -1,6 +1,8 @@
-﻿namespace QuotationCryptocurrency.Database.Repositories
+﻿using QuotationCryptocurrency.Database.Models;
+
+namespace QuotationCryptocurrency.Database.Repositories
 {
-    public interface IRepository
+    public interface IRepository<T> : IQuery<T>, ICommand<T> where T : IData
     {
     }
 }
