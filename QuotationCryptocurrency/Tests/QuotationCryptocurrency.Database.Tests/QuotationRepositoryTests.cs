@@ -29,7 +29,7 @@ namespace QuotationCryptocurrency.Database.Tests
                 IQuotationRepository repository = new QuotationRepository(DB);
 
                 // arrange
-                List<Quotation> quotations = repository.Get().ToList();
+                List<QuotationDataView> quotations = repository.Get().ToList();
 
                 //assert
                 Assert.IsTrue(quotations.Any(), "No elements in sequence");

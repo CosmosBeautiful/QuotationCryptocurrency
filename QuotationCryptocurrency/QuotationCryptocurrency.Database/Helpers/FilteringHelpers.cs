@@ -6,9 +6,9 @@ namespace QuotationCryptocurrency.Database.Helpers
 {
     public static class FilteringHelpers
     {
-        public static IQueryable<Quotation> WhereByFilterData(this IQueryable<Quotation> quotations, QuotationFilterData filterData)
+        public static IQueryable<QuotationDataView> WhereByFilterData(this IQueryable<QuotationDataView> quotations, QuotationFilterData filterData)
         {
-            IQueryable<Quotation> filterQuotations = quotations;
+            IQueryable<QuotationDataView> filterQuotations = quotations;
 
             if (filterData.IsFilterName)
             {

@@ -56,7 +56,7 @@ namespace QuotationCryptocurrency.Services
                 newQuoteModels.Add(newQuote);
             }
 
-            List<Quote> newQuotes = Mapper.Map<List<Quote>>(newQuoteModels);
+            List<QuoteData> newQuotes = Mapper.Map<List<QuoteData>>(newQuoteModels);
             QuoteRepository.AddRange(newQuotes);
         }
 
@@ -68,9 +68,9 @@ namespace QuotationCryptocurrency.Services
         private void CreateCrypto(QuotationModel quotation)
         {
             CryptoModel cryptoDTO = new CryptoModel(quotation);
-            Crypto crypto = Mapper.Map<Crypto>(cryptoDTO);
+            CryptoData cryptoData = Mapper.Map<CryptoData>(cryptoDTO);
 
-            CryptoRepository.Add(crypto);
+            CryptoRepository.Add(cryptoData);
         }
     }
 }

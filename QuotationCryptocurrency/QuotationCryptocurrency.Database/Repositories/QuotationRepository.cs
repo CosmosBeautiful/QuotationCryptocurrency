@@ -10,9 +10,9 @@ namespace QuotationCryptocurrency.Database.Repositories
 {
     public interface IQuotationRepository : IRepository
     {
-        IQueryable<Quotation> Get();
+        IQueryable<QuotationDataView> Get();
 
-        IQueryable<Quotation> Get(QuotationSortType sortOrder, QuotationFilterData filterData, PaginationData paginationData);
+        IQueryable<QuotationDataView> Get(QuotationSortType sortOrder, QuotationFilterData filterData, PaginationData paginationData);
 
         int GetTotalCount(QuotationSortType sortOrder, QuotationFilterData filterData);
     }
@@ -26,15 +26,15 @@ namespace QuotationCryptocurrency.Database.Repositories
             DB = db;
         }
 
-        public IQueryable<Quotation> Get()
+        public IQueryable<QuotationDataView> Get()
         {
-            IQueryable<Quotation> quotations = DB.QuotationsView;
+            IQueryable<QuotationDataView> quotations = DB.QuotationsView;
             return quotations;
         }
 
-        public IQueryable<Quotation> Get(QuotationSortType sortOrder, QuotationFilterData filterData, PaginationData paginationData)
+        public IQueryable<QuotationDataView> Get(QuotationSortType sortOrder, QuotationFilterData filterData, PaginationData paginationData)
         {
-            IQueryable<Quotation> quotations = DB.QuotationsView
+            IQueryable<QuotationDataView> quotations = DB.QuotationsView
                 .OrderBySortType(sortOrder)
                 .WhereByFilterData(filterData)
                 .Pagination(paginationData);
@@ -52,7 +52,7 @@ namespace QuotationCryptocurrency.Database.Repositories
             return quotationsCount;
         }
 
-        public IQueryable<Quotation> GetBySort(QuotationSortType sortOrder)
+        public IQueryable<QuotationDataView> GetBySort(QuotationSortType sortOrder)
         {
             var quotations = DB.QuotationsView
                     .OrderBySortType(sortOrder);
@@ -60,7 +60,7 @@ namespace QuotationCryptocurrency.Database.Repositories
             return quotations;
         }
 
-        public IQueryable<Quotation> GetByFilter(QuotationFilterData filterData)
+        public IQueryable<QuotationDataView> GetByFilter(QuotationFilterData filterData)
         {
             var quotations = DB.QuotationsView
                 .WhereByFilterData(filterData);
@@ -68,7 +68,7 @@ namespace QuotationCryptocurrency.Database.Repositories
             return quotations;
         }
 
-        public IQueryable<Quotation> GetByPagination(PaginationData paginationData)
+        public IQueryable<QuotationDataView> GetByPagination(PaginationData paginationData)
         {
             var quotations = DB.QuotationsView.Pagination(paginationData);
             

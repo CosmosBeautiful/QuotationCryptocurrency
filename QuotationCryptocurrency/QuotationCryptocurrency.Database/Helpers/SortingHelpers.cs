@@ -6,9 +6,9 @@ namespace QuotationCryptocurrency.Database.Helpers
 {
     public static class SortingHelpers
     {
-        public static IQueryable<Quotation> OrderBySortType(this IQueryable<Quotation> quotations, QuotationSortType sortOrder)
+        public static IQueryable<QuotationDataView> OrderBySortType(this IQueryable<QuotationDataView> quotations, QuotationSortType sortOrder)
         {
-            IQueryable<Quotation> sortQuotations;
+            IQueryable<QuotationDataView> sortQuotations;
             switch (sortOrder)
             {
                 case QuotationSortType.IdAsc:

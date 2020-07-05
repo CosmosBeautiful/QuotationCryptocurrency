@@ -6,9 +6,9 @@ namespace QuotationCryptocurrency.Database.Repositories
 {
     public interface IQuoteRepository
     {
-        void Add(Quote quote);
+        void Add(QuoteData quoteData);
 
-        void AddRange(IEnumerable<Quote> quotes);
+        void AddRange(IEnumerable<QuoteData> quotes);
     }
 
     public class QuoteRepository : IQuoteRepository
@@ -20,13 +20,13 @@ namespace QuotationCryptocurrency.Database.Repositories
             DB = db;
         }
 
-        public void Add(Quote quote)
+        public void Add(QuoteData quoteData)
         {
-            DB.Quotes.Add(quote);
+            DB.Quotes.Add(quoteData);
             DB.SaveChanges();
         }
 
-        public void AddRange(IEnumerable<Quote> quotes)
+        public void AddRange(IEnumerable<QuoteData> quotes)
         {
             DB.Quotes.AddRange(quotes);
             DB.SaveChanges();

@@ -18,7 +18,7 @@ namespace QuotationCryptocurrency.Mappings
 
         public void CreateMapQuotation()
         {
-            CreateMap<Quotation, QuotationModel>()
+            CreateMap<QuotationDataView, QuotationModel>()
                 .ForMember(x => x.Id, s => s.MapFrom(x => x.Id))
                 .ForMember(x => x.CryptoId, s => s.MapFrom(x => x.CryptoId))
                 .ForMember(x => x.Name, s => s.MapFrom(x => x.Name))
@@ -43,12 +43,12 @@ namespace QuotationCryptocurrency.Mappings
 
         public void CreateMapCrypto()
         {
-            CreateMap<Crypto, CryptoModel>()
+            CreateMap<CryptoData, CryptoModel>()
                 .ForMember(x => x.Id, s => s.MapFrom(x => x.Id))
                 .ForMember(x => x.Name, s => s.MapFrom(x => x.Name))
                 .ForMember(x => x.Symbol, s => s.MapFrom(x => x.Symbol));
 
-            CreateMap<CryptoModel, Crypto>()
+            CreateMap<CryptoModel, CryptoData>()
                 .ForMember(x => x.Id, s => s.MapFrom(x => x.Id))
                 .ForMember(x => x.Name, s => s.MapFrom(x => x.Name))
                 .ForMember(x => x.Symbol, s => s.MapFrom(x => x.Symbol));
@@ -56,7 +56,7 @@ namespace QuotationCryptocurrency.Mappings
 
         public void CreateMapQuote()
         {
-            CreateMap<Quote, QuoteModel>()
+            CreateMap<QuoteData, QuoteModel>()
                 .ForMember(x => x.Id, s => s.MapFrom(x => x.Id))
                 .ForMember(x => x.Price, s => s.MapFrom(x => x.Price))
                 .ForMember(x => x.PercentChange1h, s => s.MapFrom(x => x.PercentChange1h))
@@ -64,7 +64,7 @@ namespace QuotationCryptocurrency.Mappings
                 .ForMember(x => x.MarketCap, s => s.MapFrom(x => x.MarketCap))
                 .ForMember(x => x.LastUpdated, s => s.MapFrom(x => x.LastUpdated));
 
-            CreateMap<QuoteModel, Quote>()
+            CreateMap<QuoteModel, QuoteData>()
                 .ForMember(x => x.Id, s => s.MapFrom(x => x.Id))
                 .ForMember(x => x.Price, s => s.MapFrom(x => x.Price))
                 .ForMember(x => x.PercentChange1h, s => s.MapFrom(x => x.PercentChange1h))

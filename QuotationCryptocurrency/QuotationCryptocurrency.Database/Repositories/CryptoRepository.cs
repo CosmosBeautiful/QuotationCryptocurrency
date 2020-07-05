@@ -7,9 +7,9 @@ namespace QuotationCryptocurrency.Database.Repositories
 {
     public interface ICryptoRepository
     {
-        List<Crypto> Get();
+        List<CryptoData> Get();
 
-        void Add(Crypto crypto);
+        void Add(CryptoData cryptoData);
     }
 
     public class CryptoRepository : ICryptoRepository
@@ -21,15 +21,15 @@ namespace QuotationCryptocurrency.Database.Repositories
             DB = db;
         }
 
-        public List<Crypto> Get()
+        public List<CryptoData> Get()
         {
-            List<Crypto> cryptos = DB.Cryptos.ToList();
+            List<CryptoData> cryptos = DB.Cryptos.ToList();
             return cryptos;
         }
 
-        public void Add(Crypto crypto)
+        public void Add(CryptoData cryptoData)
         {
-            DB.Cryptos.Add(crypto);
+            DB.Cryptos.Add(cryptoData);
             DB.SaveChanges();
         }
     }

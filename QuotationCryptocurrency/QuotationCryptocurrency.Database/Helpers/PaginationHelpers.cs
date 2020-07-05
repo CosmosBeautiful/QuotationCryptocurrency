@@ -6,7 +6,7 @@ namespace QuotationCryptocurrency.Database.Helpers
 {
     public static class PaginationHelpers
     {
-        public static IQueryable<Quotation> Pagination(this IQueryable<Quotation> quotations, PaginationData paginationData)
+        public static IQueryable<QuotationDataView> Pagination(this IQueryable<QuotationDataView> quotations, PaginationData paginationData)
         {
             if (paginationData.IsValid == false)
             {
@@ -15,7 +15,7 @@ namespace QuotationCryptocurrency.Database.Helpers
 
             int pageNumberBySql = (paginationData.PageNumber - 1);
 
-            IQueryable<Quotation> paginationQuotations = quotations.Skip(pageNumberBySql * paginationData.PageSize)
+            IQueryable<QuotationDataView> paginationQuotations = quotations.Skip(pageNumberBySql * paginationData.PageSize)
                 .Take(paginationData.PageSize);
 
             return paginationQuotations;
