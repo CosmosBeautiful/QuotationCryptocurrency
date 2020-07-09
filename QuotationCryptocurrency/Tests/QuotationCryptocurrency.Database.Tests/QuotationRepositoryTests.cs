@@ -14,11 +14,14 @@ namespace QuotationCryptocurrency.Database.Tests
     {
         private static QuotationContext DB { get; set; }
 
+        #pragma warning disable IDE0060
         [AssemblyInitialize]
         public static void InitializeTests(TestContext testContext)
         {
             DB = ConfigurationHelper.GetQuotationContextTest();
         }
+        #pragma warning restore IDE0060
+
 
         [TestMethod]
         public void DatabaseConnection()
