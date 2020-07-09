@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
 using Moq;
-using QuotationCryptocurrency.Common.Tests.Helpers;
 using QuotationCryptocurrency.Request.Configurations;
 using QuotationCryptocurrency.Request.Parameters.CoinMarkerCap;
 using QuotationCryptocurrency.Request.Requests;
+using QuotationCryptocurrency.Web.Common.Tests.Helpers;
 
 namespace QuotationCryptocurrency.Request.Tests.Helpers
 {

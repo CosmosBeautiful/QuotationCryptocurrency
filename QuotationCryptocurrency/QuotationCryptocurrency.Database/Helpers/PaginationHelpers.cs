@@ -1,5 +1,5 @@
-﻿using QuotationCryptocurrency.Database.Models;
-using System.Linq;
+﻿using System.Linq;
+using QuotationCryptocurrency.Database.Models;
 using QuotationCryptocurrency.Database.Models.Pagination;
 
 namespace QuotationCryptocurrency.Database.Helpers

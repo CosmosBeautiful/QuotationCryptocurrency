@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace QuotationCryptocurrency.Common.Tests.Helpers
+namespace QuotationCryptocurrency.Web.Common.Tests.Helpers
 {
     public static class AppSettingsHelper
     {

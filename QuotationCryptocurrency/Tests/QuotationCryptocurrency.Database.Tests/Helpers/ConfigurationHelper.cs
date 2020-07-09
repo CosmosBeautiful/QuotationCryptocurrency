@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using QuotationCryptocurrency.Common.Tests.Helpers;
 using QuotationCryptocurrency.Database.Contexts;
 using QuotationCryptocurrency.Database.Tests.Contexts;
+using QuotationCryptocurrency.Web.Common.Tests.Helpers;
 
 namespace QuotationCryptocurrency.Database.Tests.Helpers
 {

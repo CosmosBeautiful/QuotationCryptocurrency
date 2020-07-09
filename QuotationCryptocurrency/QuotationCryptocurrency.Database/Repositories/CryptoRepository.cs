@@ -1,6 +1,6 @@
-﻿using QuotationCryptocurrency.Database.Contexts;
+﻿using System.Linq;
+using QuotationCryptocurrency.Database.Contexts;
 using QuotationCryptocurrency.Database.Models;
-using System.Linq;
 
 namespace QuotationCryptocurrency.Database.Repositories
 {

@@ -1,6 +1,6 @@
-﻿using QuotationCryptocurrency.Request.Parameters;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
+using QuotationCryptocurrency.Request.Parameters;
 
 namespace QuotationCryptocurrency.Request
 {

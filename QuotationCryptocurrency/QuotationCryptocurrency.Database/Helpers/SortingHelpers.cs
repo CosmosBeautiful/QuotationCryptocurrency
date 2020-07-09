@@ -1,6 +1,6 @@
-﻿using QuotationCryptocurrency.Database.Models;
+﻿using System.Linq;
+using QuotationCryptocurrency.Database.Models;
 using QuotationCryptocurrency.Database.Models.Sort;
-using System.Linq;
 
 namespace QuotationCryptocurrency.Database.Helpers
 {

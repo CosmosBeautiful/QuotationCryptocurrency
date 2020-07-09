@@ -2,10 +2,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuotationCryptocurrency.Database.Contexts;
 using QuotationCryptocurrency.Database.Models;
 using QuotationCryptocurrency.Database.Repositories;
-using QuotationCryptocurrency.Database.Tests.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using QuotationCryptocurrency.Database.Tests.Helpers;
 
 namespace QuotationCryptocurrency.Database.Tests
 {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using QuotationCryptocurrency.Request.Configurations;
-using QuotationCryptocurrency.Request.Parameters.CoinMarkerCap;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
+using QuotationCryptocurrency.Request.Configurations;
+using QuotationCryptocurrency.Request.Parameters.CoinMarkerCap;
 
 namespace QuotationCryptocurrency.Request.Requests
 {
