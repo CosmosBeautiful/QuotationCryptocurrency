@@ -1,4 +1,4 @@
-using AutoMapper;
+using LightInject;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,12 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuotationCryptocurrency.Database.Contexts;
-using QuotationCryptocurrency.Database.Repositories;
-using QuotationCryptocurrency.Request;
 using QuotationCryptocurrency.Request.Configurations;
-using QuotationCryptocurrency.Request.Parameters.CoinMarkerCap;
-using QuotationCryptocurrency.Request.Requests;
-using QuotationCryptocurrency.Web.Services;
+using QuotationCryptocurrency.Web.DI;
 
 namespace QuotationCryptocurrency.Web
 {
@@ -27,26 +23,22 @@ namespace QuotationCryptocurrency.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<QuotationContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("QuotationConnection")));
+            AddConnectionDb(services);
 
             services.Configure<CoinMarkerCapConfig>(Configuration.GetSection("CoinMarkerCap"));
 
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new QuotationCryptocurrency.Web.Mappings.MappingProfile());
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
-
-            services.AddTransient<IRequest<CoinMarkerCapParam>, CoinMarkerCapRequest>();
-            services.AddTransient<IQuotationService, QuotationService>();
-            services.AddTransient<IQuotationRepository, QuotationRepository>();
-            services.AddTransient<ICryptoRepository, CryptoRepository>();
-            services.AddTransient<IQuoteRepository, QuoteRepository>();
-
             services.AddControllersWithViews();
+        }
+
+        public void AddConnectionDb(IServiceCollection services)
+        {
+            services.AddDbContext<QuotationContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("QuotationConnection")));
+        }
+
+        public void ConfigureContainer(IServiceContainer container)
+        {
+            container.RegisterFrom<CompositionRoot>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
